@@ -1,9 +1,9 @@
 <mat-toolbar color="primary" class="toolbar">
     <nav class="navigation">
         <ul fxLayout="row" fxLayoutGap="20px">
-            <li routerLinkActive="active" routerLink="comp1">component 1</li>
-            <li routerLinkActive="active" routerLink="comp2">component 2</li>
-            <li routerLinkActive="active" routerLink="comp3">component 3</li>
+            <li *ngFor="let m of navigation" 
+                routerLinkActive="active" [routerLink]="m.url">{{m.title}}
+            </li>
         </ul>
     </nav>
 </mat-toolbar>
