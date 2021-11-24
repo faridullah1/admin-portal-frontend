@@ -1,0 +1,22 @@
+.toolbar {
+    height: 55px;
+
+    .navigation {
+        ul {
+            list-style: none;
+        }
+    
+        ul li {
+            cursor: pointer;
+        }
+
+        .active {
+            border-bottom: 2px solid #ccc;
+        }
+    }
+}
+
+.main-content {
+    height: calc(100% - 133px);
+    padding: 20px;
+}
