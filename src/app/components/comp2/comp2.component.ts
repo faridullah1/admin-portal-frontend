@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TableConfig } from '../table/models';
+
 
 @Component({
   selector: 'app-comp2',
@@ -6,11 +8,20 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./comp2.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Comp2Component implements OnInit {
+export class Comp2Component {
+	teachersConfig: TableConfig;
 
-  constructor() { }
+	constructor() {
+		this.teachersConfig = {
+			title: 'Teachers',
+			slug: 'teachers',
+			rowActions: [],
 
-  ngOnInit(): void {
-  }
-
+			columns: [
+				{name: 'full_name', title: 'Full Name'},
+				{name: 'gender', title: 'gender'},
+				{name: 'qualification', title: 'Qualification'},
+			]
+		}
+	}
 }

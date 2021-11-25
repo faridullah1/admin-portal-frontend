@@ -9,7 +9,8 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { Comp1Component } from './components/comp1/comp1.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { Comp2Component } from './components/comp2/comp2.component';
-import { Comp3Component } from './components/comp3/comp3.component';
+import { TableComponent } from './components/table/table.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,10 +20,11 @@ import { Comp3Component } from './components/comp3/comp3.component';
         Comp1Component,
         FooterComponent,
         Comp2Component,
-        Comp3Component
+        TableComponent
     ],
     imports: [
         BrowserModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
 

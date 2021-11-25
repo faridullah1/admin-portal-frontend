@@ -1,10 +1,14 @@
 <mat-toolbar color="primary" class="toolbar">
-    <nav class="navigation">
+    <nav class="navigation" fxLayout="row" fxLayoutAlign="space-between center">
         <ul fxLayout="row" fxLayoutGap="20px">
             <li *ngFor="let m of navigation" 
                 routerLinkActive="active" [routerLink]="m.url">{{m.title}}
             </li>
         </ul>
+
+        <div class="right-nav">
+            <img src="/assets/images/avatar.jpg" alt="Avatar" class="avatar">
+        </div>
     </nav>
 </mat-toolbar>
 

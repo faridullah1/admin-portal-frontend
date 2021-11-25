@@ -1,7 +1,10 @@
 .toolbar {
     height: 55px;
+    width: 100%;
 
     .navigation {
+        width: 100%;
+
         ul {
             list-style: none;
         }
@@ -12,6 +15,11 @@
 
         .active {
             border-bottom: 2px solid #ccc;
+        }
+
+        .avatar {
+            height: 45px;
+            border-radius: 50%;
         }
     }
 }
