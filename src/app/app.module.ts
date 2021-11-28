@@ -11,6 +11,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { Comp2Component } from './components/comp2/comp2.component';
 import { TableComponent } from './components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GeneralPipe } from './components/table/general.pipe';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         Comp1Component,
         FooterComponent,
         Comp2Component,
-        TableComponent
+        TableComponent,
+        GeneralPipe
     ],
     imports: [
         BrowserModule,
@@ -30,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
         MaterialModule
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

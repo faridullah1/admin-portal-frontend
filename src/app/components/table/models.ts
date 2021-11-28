@@ -1,3 +1,5 @@
+export type tableFormat = 'number' | 'date';
+
 export interface TableConfig {
     title: string;
     slug: string;
@@ -11,6 +13,7 @@ export interface TableColumn {
     title: string;
     sortable?: boolean;
     visible?: boolean;
+    format?: tableFormat;
 }
 
 export interface TableRowAction {

@@ -23,7 +23,7 @@ export class Comp1Component implements OnInit {
 				{name: 'full_name', title: 'Full Name'},
 				{name: 'father_name', title: 'Father name'},
 				{name: 'gender', title: 'Gender'},
-				{name: 'date_of_admission', title: 'Date of Addmission'},
+				{name: 'date_of_admission', title: 'Date of Addmission', format: 'date'},
 			]
 		}
 	}

@@ -27,7 +27,7 @@
                             <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
                         </ng-template>
     
-                        <td mat-cell *matCellDef="let row"> {{ row[col.name] }} </td>
+                        <td mat-cell *matCellDef="let row"> {{ row[col.name] | general:col.format }} </td>
                     </ng-container>
                 </ng-container>
 
