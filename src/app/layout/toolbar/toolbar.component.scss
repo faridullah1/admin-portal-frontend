@@ -13,6 +13,12 @@
             height: 30px;
             font-size: 30px;
         }
+
+        &:hover {
+            background-color: #eee;
+            cursor: pointer;
+            color: #fff;
+        }
     }
 
     .avatar {
