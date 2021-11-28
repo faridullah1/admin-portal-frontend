@@ -1,17 +1,15 @@
-<mat-toolbar color="primary" class="toolbar">
-    <nav class="navigation" fxLayout="row" fxLayoutAlign="space-between center">
-        <ul fxLayout="row" fxLayoutGap="20px">
-            <li *ngFor="let m of navigation" 
-                routerLinkActive="active" [routerLink]="m.url">{{m.title}}
-            </li>
-        </ul>
-
-        <div class="right-nav">
-            <img src="/assets/images/avatar.jpg" alt="Avatar" class="avatar">
+<mat-toolbar class="toolbar">
+    <nav fxFlex="100" fxLayout="row" fxLayoutAlign="end">
+        <div class="toolbar-nav-item" fxLayoutAlign="center center">
+            <mat-icon>notifications</mat-icon>
         </div>
+
+        <div class="toolbar-nav-item" fxLayoutAlign="center center">
+            <mat-icon>mark_email_unread</mat-icon>
+        </div>
+
+        <div class="toolbar-nav-item" fxLayoutAlign="center center">
+            <img src="/assets/images/avatar.jpg" alt="Avatar" class="avatar">
+        </div>    
     </nav>
 </mat-toolbar>
-
-<main class="main-content">
-    <router-outlet></router-outlet>
-</main>

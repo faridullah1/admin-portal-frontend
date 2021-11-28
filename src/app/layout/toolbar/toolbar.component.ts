@@ -12,7 +12,7 @@ import { Menu } from '../models';
 export class ToolbarComponent {
 	navigation: Menu[];
 
-    constructor() {
+  constructor() {
 		this.navigation = Navigation.menu;
 	}
 }

@@ -13,6 +13,8 @@ import { TableComponent } from './components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralPipe } from './components/table/general.pipe';
 import { DatePipe } from '@angular/common';
+import { MainLayoutComponent } from './layout/main-layout/layout.component';
+import { DrawerComponent } from './layout/drawer/drawer.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { DatePipe } from '@angular/common';
         FooterComponent,
         Comp2Component,
         TableComponent,
-        GeneralPipe
+        GeneralPipe,
+        MainLayoutComponent,
+        DrawerComponent
     ],
     imports: [
         BrowserModule,

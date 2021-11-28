@@ -1,0 +1,16 @@
+<div class="container" fxLayout="column">
+    <div fxLayout="row" style="height: calc(100% - 30px);">
+        <drawer class="drawer" [fxFlex]="drawerWidth" (signal)="onDrawerToggle($event)"></drawer>
+
+        <div class="main-content" fxFlex>
+            <app-toolbar></app-toolbar>
+
+            <main class="main">
+                <router-outlet></router-outlet>
+            </main>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</div>
+

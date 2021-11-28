@@ -1,0 +1,14 @@
+.container {
+    height: 100%;
+    background-color: #f4f6fc;
+    color: #333;
+
+    .drawer {
+        transition: max-width 300ms ease-in-out;
+    }
+    
+    .main {
+        height: calc(100% - 95px);
+        padding: 20px;
+    }
+}

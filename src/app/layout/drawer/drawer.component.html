@@ -1,0 +1,21 @@
+<div class="drawer">
+    <button mat-icon-button class="nav-toggle-btn" (click)="onToggle()">
+        <mat-icon>{{isOpen ? 'west' : 'east'}}</mat-icon>
+    </button>
+
+    <div fxLayout="column" *ngIf="isOpen" style="height: 100%;">
+        <div class="logo-container" fxLayoutAlign="center end">
+            <img src="/assets/images/logo2x.png" class="logo" alt="logo">
+        </div>
+
+        <nav class="navigation" fxLayout="row" fxLayoutAlign="space-between center">
+            <ul fxLayout="column">
+                <li *ngFor="let m of navigation" fxLayoutAlign="start center"
+                    routerLinkActive="active" [routerLink]="m.url">
+                    <mat-icon class="nav-icon">{{m.icon}}</mat-icon>
+                    {{m.title}}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SampleData } from 'src/app/common/data';
 import { TableConfig, TableRowAction } from './models';
@@ -7,7 +7,8 @@ import { TableConfig, TableRowAction } from './models';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit {
 	@Input() config: TableConfig;

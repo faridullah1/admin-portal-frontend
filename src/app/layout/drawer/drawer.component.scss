@@ -1,0 +1,47 @@
+.drawer {
+    background-color: #fff;
+    height: 100%;
+    position: relative;
+    box-shadow: 4px 0px 5px #e4ebf0;
+
+    .nav-toggle-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #afa7a7;
+    }
+
+    .logo-container {
+        height: 15%;
+
+        .logo {
+            width: 70px;
+            margin-bottom: 20px;
+        }
+    }
+
+    .navigation {
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+    
+        ul li {
+            cursor: pointer;
+            padding: 10px 25px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-icon {
+            margin-right: 20px;
+            color: #afa7a7;
+        }
+
+        .active {
+            background-color: #e5f1fa;
+            border-left: 4px solid dodgerblue;
+        }
+    }
+}
