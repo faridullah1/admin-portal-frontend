@@ -8,6 +8,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -24,6 +27,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatPaginatorModule,
         MatProgressBarModule,
         MatIconModule,
+		MatDialogModule,
+		MatDividerModule,
+		MatRadioModule,
 
         FlexLayoutModule
     ],
@@ -36,6 +42,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatPaginatorModule,
         MatProgressBarModule,
         MatIconModule,
+		MatDialogModule,
+		MatDividerModule,
+		MatRadioModule,
 
         FlexLayoutModule
     ]

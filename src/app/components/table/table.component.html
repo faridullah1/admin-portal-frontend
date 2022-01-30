@@ -1,17 +1,32 @@
 
 <div class="container" *ngIf="config">
     <div class="table-main-header">
-        <div class="title-section">
+        <div class="title-section" fxFlex="35" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
             <h1>{{config.title}}</h1>
+
+			<mat-form-field fxFlex appearance="outline" *ngIf="config.showSearch">
+				<mat-label>Search</mat-label>
+				<input type="text" placeholder="Search" matInput [formControl]="searchFC">
+			</mat-form-field>
         </div>
 
-        <div class="row-actions" *ngIf="selectedRow">
-            <button mat-button color="primary" class="action"
-                *ngFor="let ac of config.rowActions" 
-                (click)="onRowAction(ac)">
-                {{ac.title}}
-            </button>
-        </div>
+		<div fxFlex fxLayoutAlign="end" fxLayoutGap="10px">
+			<div class="row-actions" *ngIf="selectedRow">
+				<button mat-button color="primary" class="action"
+					*ngFor="let ac of config.rowActions" 
+					(click)="onRowAction(ac)">
+					{{ac.title}}
+				</button>
+			</div>
+	
+			<button *ngIf="config.showAdd" mat-raised-button color="primary" (click)="onAdd()">
+				<mat-icon>add</mat-icon> Register
+			</button>
+
+			<button mat-stroked-button (click)="loadData()">
+				<mat-icon>refresh</mat-icon>
+			</button>
+		</div>
     </div>
 
     <div class="table">

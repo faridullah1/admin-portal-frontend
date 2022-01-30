@@ -1,0 +1,68 @@
+<div class="container" fxLayout="column">
+	<h2>Add Student</h2>
+	<mat-divider fxFlex class="mb-10"></mat-divider>
+
+	<form [formGroup]="theForm" fxLayout="column" class="student-form">
+		<mat-form-field appearance="outline">
+			<mat-label>Full name</mat-label>
+			<input type="text" matInput placeholder="Full name" formControlName="fullName">
+			<mat-error *ngIf="theForm.controls['fullName'].hasError('required')">
+				Full Name is required.
+			</mat-error>
+		</mat-form-field>
+	
+		<mat-radio-group formControlName="gender" style="margin-bottom: 20px;">
+			<mat-radio-button value="male" style="margin-right: 10px;">Male</mat-radio-button>
+			<mat-radio-button value="female">Female</mat-radio-button>
+		</mat-radio-group>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Address</mat-label>
+			<textarea type="text" rows="4" matInput placeholder="Address" formControlName="address"></textarea>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Mobile Number</mat-label>
+			<input type="text" matInput placeholder="Mobile Number" formControlName="mobileNo">
+			<mat-error *ngIf="theForm.controls['mobileNo'].hasError('required')">
+				Mobile number is required.
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Father Name</mat-label>
+			<input type="text" matInput placeholder="Father name" formControlName="fatherName">
+			<mat-error *ngIf="theForm.controls['fatherName'].hasError('required')">
+				Father Name is required.
+			</mat-error>
+		</mat-form-field>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Course</mat-label>
+			<input type="text" matInput placeholder="course" formControlName="course">
+			<mat-error *ngIf="theForm.controls['course'].hasError('required')">
+				Course is required.
+			</mat-error>
+		</mat-form-field>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Teacher</mat-label>
+			<input type="text" matInput placeholder="Teacher" formControlName="teacher">
+			<mat-error *ngIf="theForm.controls['teacher'].hasError('required')">
+				Teacher is required.
+			</mat-error>
+		</mat-form-field>
+	
+		<mat-form-field appearance="outline">
+			<mat-label>Date of Joining</mat-label>
+			<input type="date" matInput placeholder="Date of Joining" formControlName="dateOfJoining">
+			<mat-error *ngIf="theForm.controls['dateOfJoining'].hasError('required')">
+				Date of joining is required.
+			</mat-error>
+		</mat-form-field>
+	</form>
+
+	<div fxLayoutAlign="end">
+		<button mat-raised-button color="primary" [disabled]="theForm.invalid && !theForm.dirty" (click)="onSave()">Save</button>
+	</div>
+</div>

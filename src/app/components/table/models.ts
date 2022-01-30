@@ -4,6 +4,9 @@ export interface TableConfig {
     title: string;
     slug: string;
 
+	showAdd: boolean;
+	showSearch: boolean;
+
     rowActions: TableRowAction[];
     columns: TableColumn[];
 }
@@ -19,4 +22,14 @@ export interface TableColumn {
 export interface TableRowAction {
     name: string;
     title: string;
+	action: string;
+}
+
+export interface TableSignal {
+	type: string;
+	row: any;
+}
+
+export interface TableAction {
+	type: 'reload'
 }

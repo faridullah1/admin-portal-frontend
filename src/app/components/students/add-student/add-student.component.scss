@@ -1,0 +1,12 @@
+.container {
+	height: 100%;
+	
+	.mb-10 {
+		margin-bottom: 10px;
+	}
+
+	.student-form {
+		height: calc(100% - 95px);
+		overflow: auto;
+	}
+}

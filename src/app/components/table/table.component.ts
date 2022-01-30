@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { SampleData } from 'src/app/common/data';
-import { TableConfig, TableRowAction } from './models';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { GenericApiResponse } from 'src/app/common/models';
+import { ApiService } from 'src/app/services/api.service';
+import { TableAction, TableConfig, TableRowAction, TableSignal } from './models';
 
 
 @Component({
@@ -12,16 +16,21 @@ import { TableConfig, TableRowAction } from './models';
 })
 export class TableComponent implements OnInit {
 	@Input() config: TableConfig;
+	@Input() actions = new Subject<TableAction>();
+
+	@Output() signal = new EventEmitter<TableSignal>();
 
 	selectedRow: any;
-	dataSource: any;
+	dataSource = new MatTableDataSource();
 	loading: boolean;
 	displayedColumns: string[];
 	showError: boolean;
 	pageSizeOptions: number[];
 	totalRecords: number;
 
-	constructor() {
+	searchFC = new FormControl();
+
+	constructor(private apiService: ApiService) {
 		this.selectedRow = null;
 		this.dataSource = new MatTableDataSource<any[]>();
 		this.loading = false;
@@ -32,6 +41,19 @@ export class TableComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.actions.subscribe((ac: TableAction) => {
+			if (ac.type === 'reload') {
+				this.loadData();
+			}
+		});
+
+		this.searchFC.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe(val => {
+			this.apiService.get(`${this.config.slug}?fullName[regex]=${val}`).subscribe((resp: GenericApiResponse) => {
+				this.dataSource.data =  resp.data[this.config.slug];
+				this.totalRecords = resp.records;
+			});
+		});
+
 		if (this.config) {
 			for (let col of this.config.columns) {
 				if (col.visible == false) continue;
@@ -43,12 +65,36 @@ export class TableComponent implements OnInit {
 	}
 
 	loadData(): void {
-		this.dataSource = SampleData[this.config.slug];
-		this.totalRecords = SampleData[this.config.slug].length;
+		this.apiService.get(this.config.slug).subscribe((resp: GenericApiResponse) => {
+			this.dataSource.data =  resp.data[this.config.slug];
+			this.totalRecords = resp.records;
+		}, (error: HttpErrorResponse) => {
+			console.error('Error', error.message);
+		});
+	}
+
+	onAdd(): void {
+		const signal = {
+			type: 'OpenForm',
+			row: null
+		}
+
+		this.signal.emit(signal);
 	}
 
 	onRowAction(ac: TableRowAction): void {
-		console.log('Table Row Action =', ac);
+		const signal = {
+			type: ac.action,
+			row: this.selectedRow
+		}
+
+		this.signal.emit(signal);
+
+		if (ac.action === 'OnDelete') {
+			this.apiService.delete(`${this.config.slug}/${this.selectedRow['_id']}`).subscribe(resp => {
+				this.loadData();
+			});
+		}
 	}
 
 	onSortChange(ev: any): void {

@@ -10,13 +10,15 @@
     }
 
     .title-section {
+		margin-bottom: 5px;
+		h1 {
+			margin: 0;
+		}
+
         .mat-form-field {
             font-size: 14px;
             width: 100%;
         }
-
-        display: flex;
-        align-items: center;
     }
 
     .action {
@@ -43,7 +45,7 @@
             }
 
             tr.mat-row:nth-child(even) {
-                background-color: #f8f6ff;
+                // background-color: #f8f6ff;
             }
         }
 
@@ -61,4 +63,8 @@
         background-color: #f1f1f1;
         border-radius: 4px;
     }
+
+	:host ::ng-deep .mat-form-field-wrapper {
+		padding: 0 !important;
+	}
 }

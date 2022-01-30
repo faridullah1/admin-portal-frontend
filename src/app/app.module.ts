@@ -6,34 +6,39 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
-import { Comp1Component } from './components/comp1/comp1.component';
+import { StudentsComponent } from './components/students/students.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { Comp2Component } from './components/comp2/comp2.component';
+import { TeachersComponent } from './components/teachers/teachers.component';
 import { TableComponent } from './components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GeneralPipe } from './components/table/general.pipe';
 import { DatePipe } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AddStudentComponent } from './components/students/add-student/add-student.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         ToolbarComponent,
-        Comp1Component,
+        StudentsComponent,
         FooterComponent,
-        Comp2Component,
+        TeachersComponent,
         TableComponent,
         GeneralPipe,
         MainLayoutComponent,
-        DrawerComponent
+        DrawerComponent,
+        AddStudentComponent
     ],
     imports: [
         BrowserModule,
+		BrowserAnimationsModule,
         ReactiveFormsModule,
+		HttpClientModule,
+		
         AppRoutingModule,
-        BrowserAnimationsModule,
 
         MaterialModule
     ],

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Comp1Component } from './components/comp1/comp1.component';
-import { Comp2Component } from './components/comp2/comp2.component';
+import { StudentsComponent } from './components/students/students.component';
+import { TeachersComponent } from './components/teachers/teachers.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
-  { path: 'students', component: Comp1Component },
-  { path: 'teachers', component: Comp2Component },
+  { path: 'students', component: StudentsComponent },
+  { path: 'teachers', component: TeachersComponent },
 
-  { path: '**', component: Comp1Component }
+  { path: '**', component: StudentsComponent }
 ];
 
 
