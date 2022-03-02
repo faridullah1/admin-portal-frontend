@@ -9,15 +9,13 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { StudentsComponent } from './components/students/students.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
-import { TableComponent } from './components/table/table.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GeneralPipe } from './components/table/general.pipe';
 import { DatePipe } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
-import { NestedValuePipe } from './components/table/nested.value.pipe';
+import { GenericPageModule } from './components/generic-page/module';
 
 
 @NgModule({
@@ -27,9 +25,6 @@ import { NestedValuePipe } from './components/table/nested.value.pipe';
         StudentsComponent,
         FooterComponent,
         TeachersComponent,
-        TableComponent,
-        GeneralPipe,
-		NestedValuePipe,
         MainLayoutComponent,
         DrawerComponent,
         AddStudentComponent
@@ -42,7 +37,8 @@ import { NestedValuePipe } from './components/table/nested.value.pipe';
 		
         AppRoutingModule,
 
-        MaterialModule
+        MaterialModule,
+		GenericPageModule
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent]

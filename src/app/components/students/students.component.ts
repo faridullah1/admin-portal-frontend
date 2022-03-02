@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { TableAction, TableConfig, TableSignal } from '../table/models';
+import { TableAction, TableConfig, TableSignal } from '../generic-page/models';
 import { AddStudentComponent } from './add-student/add-student.component';
 
 

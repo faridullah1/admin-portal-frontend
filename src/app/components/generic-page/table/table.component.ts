@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { GenericApiResponse } from 'src/app/common/models';
 import { ApiService } from 'src/app/services/api.service';
-import { TableAction, TableConfig, TableRowAction, TableSignal } from './models';
+import { TableAction, TableConfig, TableRowAction, TableSignal } from '../models';
 
 
 @Component({

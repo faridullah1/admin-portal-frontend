@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TableConfig } from '../table/models';
+import { TableConfig } from '../generic-page/models';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class TeachersComponent {
 	constructor() {
 		this.teachersConfig = {
 			title: 'Teachers',
-			slug: 'teachers',
+			slug: 'employees',
 
 			showAdd: true,
 			showSearch: true,
@@ -25,6 +25,9 @@ export class TeachersComponent {
 				{name: 'fullName', title: 'Full Name'},
 				{name: 'gender', title: 'gender'},
 				{name: 'qualification', title: 'Qualification'},
+				{name: 'experience', title: 'Experience'},
+				{name: 'email', title: 'Email'},
+				{name: 'address', title: 'Address'},
 			]
 		}
 	}
