@@ -17,6 +17,7 @@ import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
+import { NestedValuePipe } from './components/table/nested.value.pipe';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AddStudentComponent } from './components/students/add-student/add-stude
         TeachersComponent,
         TableComponent,
         GeneralPipe,
+		NestedValuePipe,
         MainLayoutComponent,
         DrawerComponent,
         AddStudentComponent

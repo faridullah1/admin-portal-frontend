@@ -11,3 +11,23 @@ export interface GenericApiResponse {
 	data: any;
 	records?: number;
 }
+
+export interface Course {
+	_id: string;
+	name: string;
+	teacher: Employee;
+	price: number;
+	duration: string;
+}
+
+export interface Employee {
+	_id: string;
+	fullName: string;
+	gender: 'male' | 'female';
+	qualification: string;
+	experience: number;
+	role: 'principle' | 'teacher' | 'admin' | 'clerk';
+	mobileNo: string;
+	address: string;
+	photo: string;
+}

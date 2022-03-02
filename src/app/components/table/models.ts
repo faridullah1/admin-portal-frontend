@@ -1,4 +1,4 @@
-export type tableFormat = 'number' | 'date';
+export type tableFormat = 'number' | 'date' | 'datetime';
 
 export interface TableConfig {
     title: string;

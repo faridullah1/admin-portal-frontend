@@ -1,68 +1,81 @@
 <div class="container" fxLayout="column">
-	<h2>Add Student</h2>
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<h2 style="margin: 0;">Add Student</h2>
+		<button mat-icon-button matDialogClose>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+	
 	<mat-divider fxFlex class="mb-10"></mat-divider>
 
 	<form [formGroup]="theForm" fxLayout="column" class="student-form">
 		<mat-form-field appearance="outline">
 			<mat-label>Full name</mat-label>
 			<input type="text" matInput placeholder="Full name" formControlName="fullName">
-			<mat-error *ngIf="theForm.controls['fullName'].hasError('required')">
-				Full Name is required.
-			</mat-error>
-		</mat-form-field>
-	
-		<mat-radio-group formControlName="gender" style="margin-bottom: 20px;">
-			<mat-radio-button value="male" style="margin-right: 10px;">Male</mat-radio-button>
-			<mat-radio-button value="female">Female</mat-radio-button>
-		</mat-radio-group>
-
-		<mat-form-field appearance="outline">
-			<mat-label>Address</mat-label>
-			<textarea type="text" rows="4" matInput placeholder="Address" formControlName="address"></textarea>
-		</mat-form-field>
-
-		<mat-form-field appearance="outline">
-			<mat-label>Mobile Number</mat-label>
-			<input type="text" matInput placeholder="Mobile Number" formControlName="mobileNo">
-			<mat-error *ngIf="theForm.controls['mobileNo'].hasError('required')">
-				Mobile number is required.
+			<mat-error *ngIf="theForm.controls['fullName'].errors">
+				<div *ngIf="theForm.controls['fullName'].hasError('required')">Full Name is required.</div>
+				<div *ngIf="theForm.controls['fullName'].hasError('minlength')">minimum length is 5 characters.</div>
+				<div *ngIf="theForm.controls['fullName'].hasError('maxlength')">maximum length is 55 characters.</div>
 			</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
 			<mat-label>Father Name</mat-label>
 			<input type="text" matInput placeholder="Father name" formControlName="fatherName">
-			<mat-error *ngIf="theForm.controls['fatherName'].hasError('required')">
-				Father Name is required.
+			<mat-error *ngIf="theForm.controls['fatherName'].errors">
+				<div *ngIf="theForm.controls['fatherName'].hasError('required')">Father Name is required.</div>
+				<div *ngIf="theForm.controls['fatherName'].hasError('minlength')">minimum length is 5 characters.</div>
+				<div *ngIf="theForm.controls['fatherName'].hasError('maxlength')">maximum length is 55 characters.</div>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Mobile Number</mat-label>
+			<input type="text" matInput placeholder="Mobile Number" (keydown)="integersOnly($event)" formControlName="mobileNo">
+			<mat-error *ngIf="theForm.controls['mobileNo'].errors">
+				<div *ngIf="theForm.controls['mobileNo'].hasError('required')">Mobile Number is required.</div>
+				<div *ngIf="theForm.controls['mobileNo'].hasError('minlength')">minimum length is 11 characters.</div>
+				<div *ngIf="theForm.controls['mobileNo'].hasError('maxlength')">maximum length is 11 characters.</div>
 			</mat-error>
 		</mat-form-field>
 	
 		<mat-form-field appearance="outline">
+			<mat-label>CNIC / B-Form</mat-label>
+			<input type="text" matInput placeholder="CNIC / B-Form" (keydown)="integersOnly($event)" formControlName="cnic">
+			<mat-error *ngIf="theForm.controls['cnic'].errors">
+				<div *ngIf="theForm.controls['cnic'].hasError('required')">CNIC/B-Form is required.</div>
+				<div *ngIf="theForm.controls['cnic'].hasError('minlength')">minimum length is 13 characters.</div>
+				<div *ngIf="theForm.controls['cnic'].hasError('maxlength')">maximum length is 13 characters.</div>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Date of Birth</mat-label>
+			<input type="date" matInput placeholder="Date of Birth" formControlName="dateOfBirth">
+			<mat-error *ngIf="theForm.controls['dateOfBirth'].hasError('required')">
+				Date of birth is required.
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
 			<mat-label>Course</mat-label>
-			<input type="text" matInput placeholder="course" formControlName="course">
+			<mat-select formControlName="course">
+				<mat-option [value]="course._id" *ngFor="let course of courses;">
+					{{ course.name }}
+				</mat-option>
+			</mat-select>
 			<mat-error *ngIf="theForm.controls['course'].hasError('required')">
 				Course is required.
 			</mat-error>
 		</mat-form-field>
-	
+
 		<mat-form-field appearance="outline">
-			<mat-label>Teacher</mat-label>
-			<input type="text" matInput placeholder="Teacher" formControlName="teacher">
-			<mat-error *ngIf="theForm.controls['teacher'].hasError('required')">
-				Teacher is required.
-			</mat-error>
-		</mat-form-field>
-	
-		<mat-form-field appearance="outline">
-			<mat-label>Date of Joining</mat-label>
-			<input type="date" matInput placeholder="Date of Joining" formControlName="dateOfJoining">
-			<mat-error *ngIf="theForm.controls['dateOfJoining'].hasError('required')">
-				Date of joining is required.
-			</mat-error>
+			<mat-label>Address</mat-label>
+			<textarea type="text" rows="4" matInput placeholder="Address" formControlName="address"></textarea>
 		</mat-form-field>
 	</form>
 
 	<div fxLayoutAlign="end">
-		<button mat-raised-button color="primary" [disabled]="theForm.invalid && !theForm.dirty" (click)="onSave()">Save</button>
+		<button mat-raised-button color="primary" [disabled]="theForm.invalid || !theForm.dirty" (click)="onSave()">Save</button>
 	</div>
 </div>

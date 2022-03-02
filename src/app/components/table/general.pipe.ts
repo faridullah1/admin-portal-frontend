@@ -13,6 +13,10 @@ export class GeneralPipe implements PipeTransform {
         {
             return this.dateFormater.transform(value, 'dd MMM YYYY');
         }
+		else if (format && format === 'datetime')
+        {
+            return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
+        }
 
         return value;
     }

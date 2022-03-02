@@ -31,12 +31,13 @@ export class StudentsComponent {
 			columns: [
 				{ name: 'fullName', title: 'Full Name' },
 				{ name: 'fatherName', title: 'Father name' },
-				{ name: 'gender', title: 'Gender' },
 				{ name: 'mobileNo', title: 'Mobile No' },
+				{ name: 'cnic', title: 'CNIC/B-Form' },
+				{ name: 'dateOfBirth', title: 'dob', format: 'date' },
+				{ name: 'course.name', title: 'Course' },
+				{ name: 'course.teacher.fullName', title: 'Teacher' },
+				{ name: 'dateOfAdmission', title: 'Date of Addmission', format: 'datetime' },
 				{ name: 'address', title: 'Address' },
-				{ name: 'dateOfJoining', title: 'Date of Addmission', format: 'date' },
-				{ name: 'course', title: 'Course' },
-				{ name: 'teacher', title: 'Teacher' }
 			]
 		}
 	}
