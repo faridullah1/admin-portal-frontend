@@ -12,6 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -32,6 +34,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatDividerModule,
 		MatRadioModule,
 		MatSelectModule,
+		MatCardModule,
+		MatDatepickerModule,
 
         FlexLayoutModule
     ],
@@ -48,6 +52,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatDividerModule,
 		MatRadioModule,
 		MatSelectModule,
+		MatCardModule,
+		MatDatepickerModule,
 
         FlexLayoutModule
     ]

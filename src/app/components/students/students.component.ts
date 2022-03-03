@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { TableAction, TableConfig, TableSignal } from '../generic-page/models';
+import { GenericPageConfig, TableAction, TableSignal } from '../generic-page/models';
 import { AddStudentComponent } from './add-student/add-student.component';
 
 
@@ -12,33 +12,48 @@ import { AddStudentComponent } from './add-student/add-student.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StudentsComponent {
-	studentsConfig: TableConfig;
+	studentsConfig: GenericPageConfig;
 	actions = new Subject<TableAction>();
 
     constructor(private dialog: MatDialog) {
 		this.studentsConfig = {
-			title: 'Students',
-			slug: 'students',
+			tableConfig: {
+				title: 'Students',
+				slug: 'students',
+	
+				showAdd: true,
+				showSearch: true,
+	
+				rowActions: [
+					{name: 'edit', title: 'Edit', action: 'OnEdit' },
+					{name: 'delete', title: 'Delete', action: 'OnDelete' }
+				],
+	
+				columns: [
+					{ name: 'fullName', title: 'Full Name' },
+					{ name: 'fatherName', title: 'Father name' },
+					{ name: 'mobileNo', title: 'Mobile No' },
+					{ name: 'cnic', title: 'CNIC/B-Form' },
+					{ name: 'dateOfBirth', title: 'dob', format: 'date' },
+					{ name: 'course.name', title: 'Course' },
+					{ name: 'course.teacher.fullName', title: 'Teacher' },
+					{ name: 'dateOfAdmission', title: 'Date of Addmission', format: 'datetime' },
+					{ name: 'address', title: 'Address' },
+				]
+			},
+			formConfig: {
+				slug: 'students',
+				title: 'Add Student',
 
-			showAdd: true,
-			showSearch: true,
-
-			rowActions: [
-				{name: 'edit', title: 'Edit', action: 'OnEdit' },
-				{name: 'delete', title: 'Delete', action: 'OnDelete' }
-			],
-
-			columns: [
-				{ name: 'fullName', title: 'Full Name' },
-				{ name: 'fatherName', title: 'Father name' },
-				{ name: 'mobileNo', title: 'Mobile No' },
-				{ name: 'cnic', title: 'CNIC/B-Form' },
-				{ name: 'dateOfBirth', title: 'dob', format: 'date' },
-				{ name: 'course.name', title: 'Course' },
-				{ name: 'course.teacher.fullName', title: 'Teacher' },
-				{ name: 'dateOfAdmission', title: 'Date of Addmission', format: 'datetime' },
-				{ name: 'address', title: 'Address' },
-			]
+				fields: [
+					{name: 'fullName', title: 'Full Name', type: 'text', placeholder: 'Enter Full Name', required: true},
+					{name: 'fatherName', title: 'Full Name', type: 'text', placeholder: 'Enter Father Name', required: true},
+					{name: 'mobileNo', title: 'Mobile Number', type: 'text', placeholder: 'Enter Mobile Number', required: true},
+					{name: 'cnic', title: 'Full Name', type: 'text', placeholder: 'Enter CNIC / B-Form', required: true},
+					{name: 'dateOfBirth', title: 'Date of Birth', type: 'date', placeholder: 'Select Date of birth', required: true},
+					{name: 'address', title: 'Address', type: 'text', placeholder: 'Enter address', required: true},
+				]
+			}
 		}
 	}
 

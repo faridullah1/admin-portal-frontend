@@ -1,0 +1,12 @@
+.container {
+	height: 100%;
+
+	.form {
+		height: calc(100% - 95px);
+		overflow: auto;
+	}
+
+	.mat-radio-button ~ .mat-radio-button {
+        margin: 0 0 10px 16px;
+    }
+}

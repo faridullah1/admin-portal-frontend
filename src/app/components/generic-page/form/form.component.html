@@ -1,1 +1,74 @@
-<p>form works!</p>
+<div class="container" fxLayout="column">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<h2 style="margin: 0;">{{id ? 'Update' : 'Add'}} {{config.title}}</h2>
+		<button mat-icon-button matDialogClose>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+	
+	<mat-divider fxFlex class="mb-3"></mat-divider>
+
+	<form [formGroup]="theForm" fxLayout="column" class="form">
+		<ng-container *ngFor="let field of config.fields;">
+            <ng-container [ngSwitch]="field.type">
+                <ng-container *ngSwitchCase="'date'">
+                    <mat-form-field appearance="outline" class="field" >
+                        <mat-label>{{field.title}}</mat-label>
+                        <input matInput [value]="timestampToDate(field.name)" 
+                            (dateChange)="onDateChange($event, theForm.get(field.name))"
+                            [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+
+                        <mat-error *ngIf="theForm.get(field.name).invalid">
+                            <div *ngIf="theForm.get(field.name).errors['required']">
+                                {{field.title}} is required.
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </ng-container>
+
+				<ng-container *ngSwitchCase="'radio'">
+                    <mat-radio-group [formControlName]="field.name" class="mb-3">
+                        <mat-radio-button [value]="opt" *ngFor="let opt of field.options">
+                            {{opt}}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                </ng-container>
+
+                <ng-container *ngSwitchDefault>
+                    <mat-form-field appearance="outline" class="field" >
+                        <mat-label>{{field.title}}</mat-label>
+                        <input [type]="field.type" matInput 
+                            [placeholder]="field.placeholder" 
+                            [formControlName]="field.name">
+                        <mat-error *ngIf="theForm.get(field.name).invalid">
+                            <div *ngIf="theForm.get(field.name).errors['required']">
+                                {{field.title}} is required.
+                            </div>
+
+							<div *ngIf="theForm.get(field.name).errors['email']">
+                                Please provide a valid email address.
+                            </div>
+
+							<div *ngIf="theForm.get(field.name).errors['minlength']">
+                                Min length for {{field.title}} is {{field.minLength}}.
+                            </div>
+
+							<div *ngIf="theForm.get(field.name).errors['maxlength']">
+                                Max length for {{field.title}} is {{field.maxLength}}.
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+	</form>
+
+	<div fxLayoutAlign="end">
+		<button mat-raised-button color="warn" (click)="onReset()" class="btn-reset mr-3">Reset</button>
+        <button mat-raised-button color="primary" (click)="onSave()" 
+            [disabled]="theForm.invalid || !theForm.dirty">Save
+        </button>
+	</div>
+</div>

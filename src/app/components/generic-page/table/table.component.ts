@@ -65,11 +65,15 @@ export class TableComponent implements OnInit {
 	}
 
 	loadData(): void {
+		this.loading = true;
+
 		this.apiService.get(this.config.slug).subscribe((resp: GenericApiResponse) => {
 			this.dataSource.data =  resp.data[this.config.slug];
 			this.totalRecords = resp.records;
+			this.loading = false;
 		}, (error: HttpErrorResponse) => {
 			console.error('Error', error.message);
+			this.loading = false;
 		});
 	}
 

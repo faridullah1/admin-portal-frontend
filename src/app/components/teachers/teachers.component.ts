@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TableConfig } from '../generic-page/models';
+import { GenericPageConfig, TableConfig } from '../generic-page/models';
 
 
 @Component({
@@ -9,26 +9,45 @@ import { TableConfig } from '../generic-page/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeachersComponent {
-	teachersConfig: TableConfig;
+	teachersConfig: GenericPageConfig;
 
 	constructor() {
 		this.teachersConfig = {
-			title: 'Teachers',
-			slug: 'employees',
+			tableConfig: {
+				title: 'Teachers',
+				slug: 'employees',
+	
+				showAdd: true,
+				showSearch: true,
+	
+				rowActions: [
+					{name: 'edit', title: 'Edit', action: 'OnEdit' },
+					{name: 'delete', title: 'Delete', action: 'OnDelete' }
+				],
+	
+				columns: [
+					{ name: 'fullName', title: 'Full Name' },
+					{ name: 'gender', title: 'gender' },
+					{ name: 'qualification', title: 'Qualification' },
+					{ name: 'experience', title: 'Experience' },
+					{ name: 'email', title: 'Email' },
+					{ name: 'address', title: 'Address' },
+				]
+			},
+			formConfig: {
+				slug: 'employees',
+				title: 'Add Teacher',
 
-			showAdd: true,
-			showSearch: true,
-
-			rowActions: [],
-
-			columns: [
-				{name: 'fullName', title: 'Full Name'},
-				{name: 'gender', title: 'gender'},
-				{name: 'qualification', title: 'Qualification'},
-				{name: 'experience', title: 'Experience'},
-				{name: 'email', title: 'Email'},
-				{name: 'address', title: 'Address'},
-			]
+				fields: [
+					{ name: 'fullName', title: 'Full Name', type: 'text', placeholder: 'Enter full name', required: true },
+					{ name: 'gender', title: 'Gender', type: 'radio', placeholder: 'Select gender', required: true, options: ['male', 'female'] },
+					{ name: 'qualification', title: 'Qualification', type: 'text', placeholder: 'Enter qualification', required: true },
+					{ name: 'experience', title: 'Experience', type: 'number', placeholder: 'Enter experience', required: true },
+					{ name: 'mobileNo', title: 'Mobile Number', type: 'text', placeholder: 'Enter Mobile Number', required: true, minLength: 11, maxLength: 11 },
+					{ name: 'email', title: 'Email', type: 'email', placeholder: 'Enter Email' },
+					{ name: 'address', title: 'Address', type: 'text', placeholder: 'Enter Address' },
+				]
+			}
 		}
 	}
 }
