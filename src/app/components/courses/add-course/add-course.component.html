@@ -1,0 +1,55 @@
+<div class="container" fxLayout="column">
+	<div fxLayout="row" fxLayoutAlign="space-between center">
+		<h2 style="margin: 0;">Add Course</h2>
+		<button mat-icon-button matDialogClose>
+			<mat-icon>close</mat-icon>
+		</button>
+	</div>
+	
+	<mat-divider fxFlex class="mb-10"></mat-divider>
+
+	<form [formGroup]="theForm" fxLayout="column" class="student-form">
+		<mat-form-field appearance="outline">
+			<mat-label>Course Name</mat-label>
+			<input type="text" matInput placeholder="Course Name" formControlName="name">
+			<mat-error *ngIf="theForm.controls['name'].errors">
+				<div *ngIf="theForm.controls['name'].hasError('required')">Name is required.</div>
+				<div *ngIf="theForm.controls['name'].hasError('minlength')">minimum length is 3 characters.</div>
+				<div *ngIf="theForm.controls['name'].hasError('maxlength')">maximum length is 55 characters.</div>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Teacher</mat-label>
+			<mat-select formControlName="teacher">
+				<mat-option [value]="teacher._id" *ngFor="let teacher of teachers;">
+					{{ teacher.fullName }}
+				</mat-option>
+			</mat-select>
+			<mat-error *ngIf="theForm.controls['teacher'].hasError('required')">
+				teacher is required.
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Price</mat-label>
+			<input type="number" matInput placeholder="Price" formControlName="price" min="0">
+			<mat-error *ngIf="theForm.controls['price'].errors">
+				<div *ngIf="theForm.controls['price'].hasError('required')">Price is required.</div>
+				<div *ngIf="theForm.controls['price'].hasError('minlength')">Price must be greator than 0</div>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Duration</mat-label>
+			<input type="text" matInput placeholder="Duration" formControlName="duration">
+			<mat-error *ngIf="theForm.controls['duration'].hasError('required')">
+				duration is required.
+			</mat-error>
+		</mat-form-field>
+	</form>
+
+	<div fxLayoutAlign="end">
+		<button mat-raised-button color="primary" [disabled]="theForm.invalid || !theForm.dirty" (click)="onSave()">Save</button>
+	</div>
+</div>

@@ -13,6 +13,13 @@ export class Navigation {
             type: 'item',
             icon: 'people',
             url: 'teachers'
+        },
+		{
+            name: 'courses',
+            title: 'Courses',
+            type: 'item',
+            icon: 'school',
+            url: 'courses'
         }
     ]
 }

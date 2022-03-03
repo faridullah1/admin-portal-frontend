@@ -16,6 +16,8 @@ import { DrawerComponent } from './layout/drawer/drawer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
 import { GenericPageModule } from './shared/generic-page/module';
+import { CoursesComponent } from './components/courses/course.component';
+import { AddCourseComponent } from './components/courses/add-course/add-course.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { GenericPageModule } from './shared/generic-page/module';
         TeachersComponent,
         MainLayoutComponent,
         DrawerComponent,
-        AddStudentComponent
+        AddStudentComponent,
+		CoursesComponent,
+		AddCourseComponent
     ],
     imports: [
         BrowserModule,

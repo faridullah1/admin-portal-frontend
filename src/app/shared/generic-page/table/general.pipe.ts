@@ -17,7 +17,7 @@ export class GeneralPipe implements PipeTransform {
         {
             return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
         }
-
+		
         return value;
     }
 }
