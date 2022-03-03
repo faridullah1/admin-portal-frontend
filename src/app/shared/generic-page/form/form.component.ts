@@ -24,6 +24,10 @@ export class FormComponent implements OnInit {
 			this.theForm.addControl(field.name, new FormControl());
 			this.setValidators(field);
 		}
+
+		if (this.id) {
+			this.getSingleRecord();
+		}
 	}
 
 	setValidators(field: FormField): void {
@@ -47,6 +51,17 @@ export class FormComponent implements OnInit {
 		{
 			this.theForm.get(field.name).setValidators(validators);
 		}
+	}
+
+	getSingleRecord(): void {
+		this.apiService.get(`${this.config.slug}/${this.id}`).subscribe(resp => {
+			if (resp.data) {
+				const rec = resp.data[this.config.slug.slice(0, -1)];
+				this.theForm.patchValue(rec);
+			}
+		}, error => {
+			console.error(error);
+		});
 	}
 
 	timestampToDate(fieldName: string): any {

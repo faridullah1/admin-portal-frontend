@@ -15,7 +15,7 @@ import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
-import { GenericPageModule } from './components/generic-page/module';
+import { GenericPageModule } from './shared/generic-page/module';
 
 
 @NgModule({

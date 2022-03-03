@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GenericPageConfig, TableConfig } from '../generic-page/models';
+import { GenericPageConfig } from 'src/app/shared/generic-page/models';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class TeachersComponent {
 			},
 			formConfig: {
 				slug: 'employees',
-				title: 'Add Teacher',
+				title: 'Teacher',
 
 				fields: [
 					{ name: 'fullName', title: 'Full Name', type: 'text', placeholder: 'Enter full name', required: true },
