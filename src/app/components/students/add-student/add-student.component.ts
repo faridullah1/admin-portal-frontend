@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Helpers } from 'src/app/common/helpers';
+import { Helpers } from 'src/app/shared/helpers';
 import { Course } from 'src/app/common/models';
 import { ApiService } from 'src/app/services/api.service';
 

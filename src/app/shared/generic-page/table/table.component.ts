@@ -24,18 +24,21 @@ export class TableComponent implements OnInit {
 	dataSource = new MatTableDataSource();
 	loading: boolean;
 	displayedColumns: string[];
-	showError: boolean;
 	pageSizeOptions: number[];
 	totalRecords: number;
 
 	searchFC = new FormControl();
+	hasError = false;
+
+	showError = (i: number, row: any) => {
+        return this.hasError;
+    }
 
 	constructor(private apiService: ApiService) {
 		this.selectedRow = null;
 		this.dataSource = new MatTableDataSource<any[]>();
 		this.loading = false;
 		this.displayedColumns = [];
-		this.showError = false;
 		this.pageSizeOptions = [10, 15, 20, 25];
 		this.totalRecords = 0;
 	}
@@ -71,11 +74,24 @@ export class TableComponent implements OnInit {
 			this.dataSource.data =  resp.data[this.config.slug];
 			this.totalRecords = resp.records;
 			this.loading = false;
+			this.checkIfNoRecord();
 		}, (error: HttpErrorResponse) => {
 			console.error('Error', error.message);
 			this.loading = false;
 		});
 	}
+
+	checkIfNoRecord(): void {
+        if (this.dataSource.data.length === 0) {
+            this.hasError = true;
+            const r = {
+                title: 'No Record Found',
+                message: ''
+            };
+
+            this.dataSource.data = [r];
+        }
+    }
 
 	onAdd(): void {
 		const signal = {
