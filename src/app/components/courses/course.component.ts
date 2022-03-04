@@ -20,7 +20,8 @@ export class CoursesComponent {
 			tableConfig: {
 				title: 'Courses',
 				slug: 'courses',
-	
+
+				addBtnText: 'Add Course',
 				showAdd: true,
 				showSearch: true,
 	

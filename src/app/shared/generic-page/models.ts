@@ -10,6 +10,7 @@ export interface TableConfig {
     title: string;
     slug: string;
 
+	addBtnText?: string;
 	showAdd: boolean;
 	showSearch: boolean;
 

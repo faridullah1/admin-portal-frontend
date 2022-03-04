@@ -21,6 +21,7 @@ export class StudentsComponent {
 				title: 'Students',
 				slug: 'students',
 	
+				addBtnText: 'Register',
 				showAdd: true,
 				showSearch: true,
 	

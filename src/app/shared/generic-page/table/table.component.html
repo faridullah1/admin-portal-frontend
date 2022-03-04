@@ -20,7 +20,7 @@
 			</div>
 	
 			<button *ngIf="config.showAdd" mat-raised-button color="primary" (click)="onAdd()">
-				<mat-icon>add</mat-icon> Register
+				<mat-icon>add</mat-icon> {{ config.addBtnText || 'Add New'}}
 			</button>
 
 			<button mat-stroked-button (click)="loadData()">
