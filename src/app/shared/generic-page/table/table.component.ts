@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { GenericApiResponse } from 'src/app/common/models';
 import { ApiService } from 'src/app/services/api.service';
+import { AlertDialogService } from '../../alert-dialog/alert.service';
 import { TableAction, TableConfig, TableRowAction, TableSignal } from '../models';
 
 
@@ -34,7 +35,7 @@ export class TableComponent implements OnInit {
         return this.hasError;
     }
 
-	constructor(private apiService: ApiService) {
+	constructor(private apiService: ApiService, private alertService: AlertDialogService) {
 		this.selectedRow = null;
 		this.dataSource = new MatTableDataSource<any[]>();
 		this.loading = false;
@@ -111,8 +112,12 @@ export class TableComponent implements OnInit {
 		this.signal.emit(signal);
 
 		if (ac.action === 'OnDelete') {
-			this.apiService.delete(`${this.config.slug}/${this.selectedRow['_id']}`).subscribe(resp => {
-				this.loadData();
+			this.alertService.confirm('Are you sure, you want to delete the record?').subscribe(resp => {
+				if (resp.positive) {
+					this.apiService.delete(`${this.config.slug}/${this.selectedRow['_id']}`).subscribe(resp => {
+						this.loadData();
+					});
+				}
 			});
 		}
 	}
