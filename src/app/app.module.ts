@@ -18,6 +18,7 @@ import { AddStudentComponent } from './components/students/add-student/add-stude
 import { GenericPageModule } from './shared/generic-page/module';
 import { CoursesComponent } from './components/courses/course.component';
 import { AddCourseComponent } from './components/courses/add-course/add-course.component';
+import { AlertDialogModule } from './shared/alert-dialog/alert.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AddCourseComponent } from './components/courses/add-course/add-course.c
         AppRoutingModule,
 
         MaterialModule,
-		GenericPageModule
+		GenericPageModule,
+		AlertDialogModule
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent]
