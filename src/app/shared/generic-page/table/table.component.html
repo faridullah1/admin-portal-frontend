@@ -4,10 +4,12 @@
         <div class="title-section" fxFlex="35" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
             <h1>{{config.title}}</h1>
 
-			<mat-form-field fxFlex appearance="outline" *ngIf="config.showSearch">
-				<mat-label>Search</mat-label>
-				<input type="text" placeholder="Search" matInput [formControl]="searchFC">
-			</mat-form-field>
+			<div fxFlex class="search-field">
+				<mat-form-field fxFlex appearance="outline" *ngIf="config.showSearch">
+					<mat-label>Search</mat-label>
+					<input type="text" placeholder="Search" matInput [formControl]="searchFC">
+				</mat-form-field>
+			</div>
         </div>
 
 		<div fxFlex fxLayoutAlign="end" fxLayoutGap="10px">

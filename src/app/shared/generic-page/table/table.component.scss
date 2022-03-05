@@ -43,10 +43,6 @@
                     font-size: 16px;
                 }
             }
-
-            tr.mat-row:nth-child(even) {
-                // background-color: #f8f6ff;
-            }
         }
 
         .selected {
@@ -64,7 +60,7 @@
         border-radius: 4px;
     }
 
-	:host ::ng-deep .mat-form-field-wrapper {
+	:host ::ng-deep .search-field .mat-form-field-wrapper {
 		padding: 0 !important;
 	}
 }
