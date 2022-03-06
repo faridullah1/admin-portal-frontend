@@ -24,6 +24,7 @@ export class CoursesComponent {
 				addBtnText: 'Add Course',
 				showAdd: true,
 				showSearch: true,
+				searchColumn: 'name',
 	
 				rowActions: [
 					{name: 'edit', title: 'Edit', action: 'OnEdit' },

@@ -14,6 +14,7 @@ export interface TableConfig {
 	showAdd: boolean;
 	showSearch: boolean;
 
+	searchColumn?: string;
 	where?: WhereData;
 
     rowActions: TableRowAction[];

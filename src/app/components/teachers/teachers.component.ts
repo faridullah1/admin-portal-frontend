@@ -20,6 +20,7 @@ export class TeachersComponent {
 				showAdd: true,
 				showSearch: true,
 
+				searchColumn: 'fullName',
 				where: { column: 'role', search: 'teacher', op: 'eq' },
 	
 				rowActions: [

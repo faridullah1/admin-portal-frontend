@@ -24,6 +24,8 @@ export class StudentsComponent {
 				addBtnText: 'Register',
 				showAdd: true,
 				showSearch: true,
+
+				searchColumn: 'fullName',
 	
 				rowActions: [
 					{name: 'edit', title: 'Edit', action: 'OnEdit' },
