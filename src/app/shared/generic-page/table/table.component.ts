@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
 	displayedColumns: string[];
 	pageSizeOptions: number[];
 	totalRecords: number;
-	limit: number = 2;
+	limit: number = 10;
 	page: number = 1;
 
 	searchFC = new FormControl();
@@ -155,7 +155,7 @@ export class TableComponent implements OnInit {
 	}
 
 	onPageChange(ev: PageEvent): void {
-		console.log('Event =', ev);
+		this.limit = ev.pageSize;
 		this.page = ev.pageIndex + 1;
 		this.loadData();
 	}
