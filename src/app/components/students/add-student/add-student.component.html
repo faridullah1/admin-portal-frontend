@@ -1,6 +1,6 @@
 <div class="container" fxLayout="column">
 	<div fxLayout="row" fxLayoutAlign="space-between center">
-		<h2 style="margin: 0;">Add Student</h2>
+		<h2 style="margin: 0;">{{ id ? 'Update Student' : 'Add Student'}}</h2>
 		<button mat-icon-button matDialogClose>
 			<mat-icon>close</mat-icon>
 		</button>
@@ -14,7 +14,7 @@
 			<input type="text" matInput placeholder="Full name" formControlName="fullName">
 			<mat-error *ngIf="theForm.controls['fullName'].errors">
 				<div *ngIf="theForm.controls['fullName'].hasError('required')">Full Name is required.</div>
-				<div *ngIf="theForm.controls['fullName'].hasError('minlength')">minimum length is 5 characters.</div>
+				<div *ngIf="theForm.controls['fullName'].hasError('minlength')">minimum length is 3 characters.</div>
 				<div *ngIf="theForm.controls['fullName'].hasError('maxlength')">maximum length is 55 characters.</div>
 			</mat-error>
 		</mat-form-field>
@@ -24,7 +24,7 @@
 			<input type="text" matInput placeholder="Father name" formControlName="fatherName">
 			<mat-error *ngIf="theForm.controls['fatherName'].errors">
 				<div *ngIf="theForm.controls['fatherName'].hasError('required')">Father Name is required.</div>
-				<div *ngIf="theForm.controls['fatherName'].hasError('minlength')">minimum length is 5 characters.</div>
+				<div *ngIf="theForm.controls['fatherName'].hasError('minlength')">minimum length is 3 characters.</div>
 				<div *ngIf="theForm.controls['fatherName'].hasError('maxlength')">maximum length is 55 characters.</div>
 			</mat-error>
 		</mat-form-field>

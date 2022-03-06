@@ -19,13 +19,12 @@ export class AddStudentComponent implements OnInit {
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<AddStudentComponent>) 
 	{
 		this.theForm = new FormGroup({
-			fullName: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(55)]),
-			fatherName: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(55)]),
+			fullName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
+			fatherName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
 			mobileNo: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
 			cnic: new FormControl(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
 			dateOfBirth: new FormControl(null, [Validators.required]),
 			course: new FormControl(null, [Validators.required]),
-
 			address: new FormControl(null),
 		});
 	}

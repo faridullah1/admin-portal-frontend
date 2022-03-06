@@ -21,26 +21,22 @@ export class AddCourseComponent implements OnInit {
 		this.theForm = new FormGroup({
 			name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
 			teacher: new FormControl(null, [Validators.required]),
-
 			price: new FormControl(null, [Validators.required, Validators.minLength(0)]),
 			duration: new FormControl(null, [Validators.required]),
 		});
 	}
 
 	ngOnInit(): void {
-		this.loadCourses();
+		this.getAllTeachers();
 	}
 
-	loadCourses(): void {
-		this.apiService.get(`employees`).subscribe(resp => {
+	getAllTeachers(): void {
+		this.apiService.get('employees?role=teacher').subscribe(resp => {
 			this.teachers = resp.data.employees;
-
-			if (this.id) {
-				this.getCourse();
-			}
+			if (this.id) this.getCourse();
 		}, error => {
 			console.error(error);
-		})
+		});
 	}
 
 	getCourse(): void {
