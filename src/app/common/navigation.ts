@@ -20,6 +20,13 @@ export class Navigation {
             type: 'item',
             icon: 'school',
             url: 'courses'
-        }
+        },
+		{
+            name: 'all_employees',
+            title: 'All Employees',
+            type: 'item',
+            icon: 'people_alt',
+            url: 'employees'
+        },
     ]
 }

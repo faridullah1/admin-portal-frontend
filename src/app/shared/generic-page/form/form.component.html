@@ -36,6 +36,22 @@
                       </mat-radio-group>
                 </ng-container>
 
+				<ng-container *ngSwitchCase="'select'">
+					<mat-form-field appearance="outline" class="mb-3">
+						<mat-label>{{field.title}}</mat-label>
+						<mat-select [formControlName]="field.name">
+							<mat-option [value]="opt" *ngFor="let opt of field.options;">
+								{{ opt }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="theForm.get(field.name).invalid">
+							<div *ngIf="theForm.get(field.name).errors['required']">
+								{{field.title}} is required.
+							</div>
+						</mat-error>
+					</mat-form-field>
+                </ng-container>
+
                 <ng-container *ngSwitchDefault>
                     <mat-form-field appearance="outline" class="field" >
                         <mat-label>{{field.title}}</mat-label>

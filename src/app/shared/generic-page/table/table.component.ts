@@ -70,8 +70,14 @@ export class TableComponent implements OnInit {
 
 	loadData(): void {
 		this.loading = true;
+		let slug = this.config.slug;
 
-		this.apiService.get(this.config.slug).subscribe((resp: GenericApiResponse) => {
+		if (this.config.where) {
+			const queryString = this.getQueryString();
+			slug = `${slug}?${queryString}`;
+		}
+
+		this.apiService.get(slug).subscribe((resp: GenericApiResponse) => {
 			this.dataSource.data =  resp.data[this.config.slug];
 			this.totalRecords = resp.records;
 			this.loading = false;
@@ -80,6 +86,18 @@ export class TableComponent implements OnInit {
 			console.error('Error', error.message);
 			this.loading = false;
 		});
+	}
+
+	getQueryString(): string {
+		const { column, search, op } = this.config.where;
+
+		let queryString = `${column}[${op}]=${search}`;
+
+		if (this.config.where.op === 'eq') {
+			queryString = `${column}=${search}`;
+		}
+
+		return queryString;
 	}
 
 	checkIfNoRecord(): void {

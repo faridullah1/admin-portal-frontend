@@ -19,6 +19,7 @@ import { GenericPageModule } from './shared/generic-page/module';
 import { CoursesComponent } from './components/courses/course.component';
 import { AddCourseComponent } from './components/courses/add-course/add-course.component';
 import { AlertDialogModule } from './shared/alert-dialog/alert.module';
+import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AlertDialogModule } from './shared/alert-dialog/alert.module';
         DrawerComponent,
         AddStudentComponent,
 		CoursesComponent,
-		AddCourseComponent
+		AddCourseComponent,
+  AllEmployeesComponent
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,5 @@
 export type tableFormat = 'number' | 'date' | 'datetime';
-export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'date';
+export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'select' | 'date';
 
 export interface GenericPageConfig {
     tableConfig: TableConfig;
@@ -13,6 +13,8 @@ export interface TableConfig {
 	addBtnText?: string;
 	showAdd: boolean;
 	showSearch: boolean;
+
+	where?: WhereData;
 
     rowActions: TableRowAction[];
     columns: TableColumn[];
@@ -31,6 +33,13 @@ export interface TableColumn {
     sortable?: boolean;
     visible?: boolean;
     format?: tableFormat;
+}
+
+export interface WhereData {
+	column: string;
+	search: any;
+
+	op: 'eq' | 'lt' | 'lte' | 'gt' | 'gte' | 'ne';
 }
 
 export interface FormField {
