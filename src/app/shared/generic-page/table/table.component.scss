@@ -64,3 +64,19 @@
 		padding: 0 !important;
 	}
 }
+
+::ng-deep .mat-sort-header-stem {
+	background-color: #999 !important;
+}
+
+::ng-deep .mat-sort-header-pointer-left {
+	background-color: #999 !important;
+}
+
+::ng-deep .mat-sort-header-pointer-right {
+	background-color: #999 !important;
+}
+
+::ng-deep .mat-sort-header-pointer-middle {
+	background-color: #999 !important;
+}

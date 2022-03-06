@@ -33,7 +33,7 @@ export class CoursesComponent {
 				columns: [
 					{ name: 'name', title: 'Course Name' },
 					{ name: 'teacher.fullName', title: 'Teacher' },
-					{ name: 'price', title: 'Price', format: 'number' },
+					{ name: 'price', title: 'Price', format: 'number', sortable: true },
 					{ name: 'duration', title: 'Duration' },
 				]
 			},
@@ -42,9 +42,9 @@ export class CoursesComponent {
 				title: 'Course',
 
 				fields: [
-					{name: 'name', title: 'Course Name', type: 'text', placeholder: 'Enter course name', required: true},
-					{name: 'price', title: 'Price', type: 'number', placeholder: 'Enter course price', required: true},
-					{name: 'duration', title: 'Duration', type: 'text', placeholder: 'Enter course duration', required: true},
+					{ name: 'name', title: 'Course Name', type: 'text', placeholder: 'Enter course name', required: true },
+					{ name: 'price', title: 'Price', type: 'number', placeholder: 'Enter course price', required: true },
+					{ name: 'duration', title: 'Duration', type: 'text', placeholder: 'Enter course duration', required: true },
 				]
 			}
 		}

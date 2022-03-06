@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericPageConfig } from 'src/app/shared/generic-page/models';
 
+
 @Component({
   selector: 'app-all-employees',
   templateUrl: './all-employees.component.html',

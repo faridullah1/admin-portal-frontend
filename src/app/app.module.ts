@@ -34,7 +34,7 @@ import { AllEmployeesComponent } from './components/all-employees/all-employees.
         AddStudentComponent,
 		CoursesComponent,
 		AddCourseComponent,
-  AllEmployeesComponent
+  		AllEmployeesComponent
     ],
     imports: [
         BrowserModule,

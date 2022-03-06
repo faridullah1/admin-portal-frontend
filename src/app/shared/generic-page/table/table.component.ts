@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { GenericApiResponse } from 'src/app/common/models';
@@ -20,6 +21,7 @@ export class TableComponent implements OnInit {
 	@Input() actions = new Subject<TableAction>();
 
 	@Output() signal = new EventEmitter<TableSignal>();
+	@ViewChild(MatSort) sort: MatSort;
 
 	selectedRow: any;
 	dataSource = new MatTableDataSource();
@@ -79,6 +81,7 @@ export class TableComponent implements OnInit {
 
 		this.apiService.get(slug).subscribe((resp: GenericApiResponse) => {
 			this.dataSource.data =  resp.data[this.config.slug];
+			this.dataSource.sort = this.sort;
 			this.totalRecords = resp.records;
 			this.loading = false;
 			this.checkIfNoRecord();

@@ -14,6 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSortModule } from '@angular/material/sort';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -36,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatSelectModule,
 		MatCardModule,
 		MatDatepickerModule,
+		MatSortModule,
 
         FlexLayoutModule
     ],
@@ -54,6 +56,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatSelectModule,
 		MatCardModule,
 		MatDatepickerModule,
+		MatSortModule,
 
         FlexLayoutModule
     ]
