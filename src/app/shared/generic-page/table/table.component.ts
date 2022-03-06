@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -29,15 +30,12 @@ export class TableComponent implements OnInit {
 	displayedColumns: string[];
 	pageSizeOptions: number[];
 	totalRecords: number;
+	limit: number = 2;
+	page: number = 1;
 
 	searchFC = new FormControl();
-	hasError = false;
 
-	showError = (i: number, row: any) => {
-        return this.hasError;
-    }
-
-	constructor(private apiService: ApiService, private alertService: AlertDialogService) {
+	constructor(private apiService: ApiService, private alertService: AlertDialogService, private cdr: ChangeDetectorRef) {
 		this.selectedRow = null;
 		this.dataSource = new MatTableDataSource<any[]>();
 		this.loading = false;
@@ -54,10 +52,7 @@ export class TableComponent implements OnInit {
 		});
 
 		this.searchFC.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe(val => {
-			this.apiService.get(`${this.config.slug}?fullName[regex]=${val}`).subscribe((resp: GenericApiResponse) => {
-				this.dataSource.data =  resp.data[this.config.slug];
-				this.totalRecords = resp.records;
-			});
+			this.searchData(val);
 		});
 
 		if (this.config) {
@@ -70,28 +65,48 @@ export class TableComponent implements OnInit {
 		}
 	}
 
-	loadData(): void {
+	loadData(query = null): void {
+		this.dataSource.data = [];
 		this.loading = true;
-		let slug = this.config.slug;
+		let queryString = `?page=${this.page}&limit=${this.limit}`;
 
+		if (query) {
+			queryString = `${queryString}&${query}`;
+		}
+		
 		if (this.config.where) {
-			const queryString = this.getQueryString();
-			slug = `${slug}?${queryString}`;
+			const whereQueryStr = this.handleWhere();
+			queryString = `${queryString}&${whereQueryStr}`;
 		}
 
+		let slug = this.config.slug + queryString;
+
 		this.apiService.get(slug).subscribe((resp: GenericApiResponse) => {
-			this.dataSource.data =  resp.data[this.config.slug];
+			this.loading = false;
+			this.dataSource.data = resp.data[this.config.slug];
 			this.dataSource.sort = this.sort;
 			this.totalRecords = resp.records;
-			this.loading = false;
-			this.checkIfNoRecord();
 		}, (error: HttpErrorResponse) => {
 			console.error('Error', error.message);
 			this.loading = false;
 		});
 	}
 
-	getQueryString(): string {
+	searchData(value: string) {
+		if (value === '') {
+			this.loadData();
+			return;
+		}
+
+		const searchCol = this.config.searchColumn;
+		
+		if (searchCol) {
+			const queryStr = `${searchCol}=${value}`;
+			this.loadData(queryStr);
+		}
+	}
+
+	handleWhere(): string {
 		const { column, search, op } = this.config.where;
 
 		let queryString = `${column}[${op}]=${search}`;
@@ -102,18 +117,6 @@ export class TableComponent implements OnInit {
 
 		return queryString;
 	}
-
-	checkIfNoRecord(): void {
-        if (this.dataSource.data.length === 0) {
-            this.hasError = true;
-            const r = {
-                title: 'No Record Found',
-                message: ''
-            };
-
-            this.dataSource.data = [r];
-        }
-    }
 
 	onAdd(): void {
 		const signal = {
@@ -148,12 +151,12 @@ export class TableComponent implements OnInit {
 	}
 
 	onRowClick(row: any): void {
-		console.log('Table row click =', row);
-
 		this.selectedRow = row;
 	}
 
-	onPageChange(ev: any): void {
-		console.log('Table page change =', ev);
+	onPageChange(ev: PageEvent): void {
+		console.log('Event =', ev);
+		this.page = ev.pageIndex + 1;
+		this.loadData();
 	}
 }
