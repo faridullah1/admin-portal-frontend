@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'employees', component: AllEmployeesComponent },
 
-  { path: '**', component: StudentsComponent }
+  { path: '**', redirectTo: 'students', pathMatch: 'full' }
 ];
 
 
