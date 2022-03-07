@@ -10,7 +10,7 @@ import { StudentsComponent } from './components/students/students.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,7 +48,7 @@ import { AllEmployeesComponent } from './components/all-employees/all-employees.
 		GenericPageModule,
 		AlertDialogModule
     ],
-    providers: [DatePipe],
+    providers: [DatePipe, DecimalPipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

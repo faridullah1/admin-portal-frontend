@@ -66,7 +66,6 @@ export class TableComponent implements OnInit {
 	}
 
 	loadData(query = null): void {
-		this.dataSource.data = [];
 		this.loading = true;
 		let queryString = `?page=${this.page}&limit=${this.limit}`;
 
@@ -87,7 +86,6 @@ export class TableComponent implements OnInit {
 			this.dataSource.sort = this.sort;
 			this.totalRecords = resp.records;
 		}, (error: HttpErrorResponse) => {
-			console.error('Error', error.message);
 			this.loading = false;
 		});
 	}

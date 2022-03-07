@@ -1,12 +1,12 @@
-import { DatePipe } from "@angular/common";
+import { DatePipe, DecimalPipe } from "@angular/common";
 import { Pipe, PipeTransform } from "@angular/core";
 import { tableFormat } from "../models";
 
 @Pipe({
-    name: 'general'
+    name: 'format'
 })
-export class GeneralPipe implements PipeTransform {
-    constructor(private dateFormater: DatePipe) {}
+export class FormatDataPipe implements PipeTransform {
+    constructor(private dateFormater: DatePipe, private numberFormater: DecimalPipe) {}
 
     transform(value: any, format: tableFormat) {
         if (format && format === 'date')
@@ -17,6 +17,9 @@ export class GeneralPipe implements PipeTransform {
         {
             return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
         }
+		else if (format && format === 'number') {
+			return this.numberFormater.transform(value);
+		}
 		
         return value;
     }

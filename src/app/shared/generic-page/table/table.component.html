@@ -44,7 +44,7 @@
                             <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
                         </ng-template>
     
-                        <td mat-cell *matCellDef="let row"> {{ row[col.name] | nestedValue:col.name:row | general:col.format }} </td>
+                        <td mat-cell *matCellDef="let row"> {{ row[col.name] | nestedValue:col.name:row | format:col.format }} </td>
                     </ng-container>
                 </ng-container>
 
@@ -54,11 +54,13 @@
                     </th>
                 </ng-container>
 
-				<tr class="mat-row" *matNoDataRow>
-					<td class="mat-cell" colspan="100%">
-					  	No data matching the filter
-					</td>
-				</tr>
+				<ng-container *ngIf="!loading">
+					<tr class="mat-row" *matNoDataRow>
+						<td class="mat-cell" colspan="100%">
+							  No data matching the filter
+						</td>
+					</tr>
+				</ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
                 <tr mat-header-row *matHeaderRowDef="['loading']; sticky: true;" style="height: 3px !important;"></tr>

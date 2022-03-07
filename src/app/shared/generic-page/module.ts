@@ -5,7 +5,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 
 import { FormComponent } from './form/form.component';
 import { PageComponent } from './page/page.component';
-import { GeneralPipe } from './table/general.pipe';
+import { FormatDataPipe } from './table/format.pipe';
 import { NestedValuePipe } from './table/nested.value.pipe';
 import { TableComponent } from './table/table.component';
 
@@ -22,7 +22,7 @@ import { TableComponent } from './table/table.component';
 		TableComponent,
         FormComponent,
 
-        GeneralPipe,
+        FormatDataPipe,
 		NestedValuePipe,
 	],
 	exports: [

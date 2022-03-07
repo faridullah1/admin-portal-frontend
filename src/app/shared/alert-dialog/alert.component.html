@@ -1,14 +1,17 @@
 <div class="alert-dialog">
-	<div class="title">{{alert?.title}}</div>
+	<div [class]="alert.type" *ngIf="alert.type === 'error'" class="mb-3" fxLayoutAlign="center center">
+		<mat-icon>{{ alert.icon }}</mat-icon>
+	</div>
 
-	<div *ngIf="alert?.type === 'confirm'; else normal" fxLayout="row" fxLayoutAlign="center" class="mt-3">
+	<div class="title mb-3">{{alert?.title}}</div>
+	<div class="mb-3" *ngIf="alert.message">{{alert.message}}</div>
+
+	<div *ngIf="alert?.type === 'confirm'; else normal" fxLayout="row" fxLayoutAlign="center">
 		<button mat-raised-button color="primary" class="mr-3" (click)="onYes()">Yes</button>
 		<button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
 	</div>
 
 	<ng-template #normal>
-		<div class="mt-3">
-			<button mat-raised-button color="primary" (click)="onYes()">Ok</button>
-		</div>
+		<button mat-raised-button color="primary" (click)="onYes()">Ok</button>
 	</ng-template>
 </div>

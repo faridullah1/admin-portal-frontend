@@ -27,7 +27,7 @@ export class AllEmployeesComponent implements OnInit {
 	
 				columns: [
 					{ name: 'fullName', title: 'Full Name' },
-					{ name: 'gender', title: 'gender' },
+					{ name: 'gender', title: 'Gender' },
 					{ name: 'qualification', title: 'Qualification' },
 					{ name: 'experience', title: 'Experience' },
 					{ name: 'role', title: 'Role' },

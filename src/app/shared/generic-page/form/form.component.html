@@ -37,7 +37,7 @@
                 </ng-container>
 
 				<ng-container *ngSwitchCase="'select'">
-					<mat-form-field appearance="outline" class="mb-3">
+					<mat-form-field appearance="outline">
 						<mat-label>{{field.title}}</mat-label>
 						<mat-select [formControlName]="field.name">
 							<mat-option [value]="opt" *ngFor="let opt of field.options;">

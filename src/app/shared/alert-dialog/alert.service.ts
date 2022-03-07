@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Observable } from "rxjs";
-import { Alert, AlertAction, AlertInfo } from "./alert.common";
+import { Alert, AlertAction } from "./alert.common";
 import { AlertDialogComponent } from "./alert.component";
 
 
@@ -9,11 +9,11 @@ import { AlertDialogComponent } from "./alert.component";
 export class AlertDialogService {
 	constructor(private dialog: MatDialog) {}
 
-	private addAlert(alert: AlertInfo): Observable<AlertAction> {
+	private addAlert(alert: Alert): Observable<AlertAction> {
 		const alertInstance = new Alert(alert);
 
 		const dialogRef = this.dialog.open(AlertDialogComponent, {
-			width: '450px',
+			width: '400px',
 		});
 
 		dialogRef.componentInstance.alert = alertInstance;
@@ -22,12 +22,17 @@ export class AlertDialogService {
 	}
 
 	success(title: string): Observable<AlertAction> {
-		const alert: AlertInfo = { type: 'success', title };
+		const alert: Alert = { type: 'success', title };
+		return this.addAlert(alert);
+	}
+
+	error(title: string, message: string): Observable<AlertAction> {
+		const alert: Alert = { type: 'error', title, message };
 		return this.addAlert(alert);
 	}
 
 	confirm(title: string): Observable<AlertAction> {
-		const alert: AlertInfo = { type: 'confirm', title };
+		const alert: Alert = { type: 'confirm', title };
 		return this.addAlert(alert);
 	}
 }
