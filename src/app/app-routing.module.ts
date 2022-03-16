@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 import { CoursesComponent } from './components/courses/course.component';
 import { StudentsComponent } from './components/students/students.component';
+import { SystemSettingsComponent } from './components/system-settings/system-settings.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'teachers', component: TeachersComponent },
   { path: 'courses', component: CoursesComponent },
   { path: 'employees', component: AllEmployeesComponent },
+  { path: 'settings', component: SystemSettingsComponent },
 
   { path: '**', redirectTo: 'students', pathMatch: 'full' }
 ];
