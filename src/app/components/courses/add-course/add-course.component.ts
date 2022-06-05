@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Helpers } from 'src/app/shared/helpers';
 import { Employee } from 'src/app/common/models';
@@ -14,15 +14,15 @@ import { ApiService } from 'src/app/services/api.service';
 export class AddCourseComponent implements OnInit {
 	teachers: Employee[] = [];
 	id: string = null;
-	theForm: FormGroup;
+	theForm: UntypedFormGroup;
 
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<AddCourseComponent>) 
 	{
-		this.theForm = new FormGroup({
-			name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
-			teacher: new FormControl(null, [Validators.required]),
-			price: new FormControl(null, [Validators.required, Validators.minLength(0)]),
-			duration: new FormControl(null, [Validators.required]),
+		this.theForm = new UntypedFormGroup({
+			name: new UntypedFormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
+			teacher: new UntypedFormControl(null, [Validators.required]),
+			price: new UntypedFormControl(null, [Validators.required, Validators.minLength(0)]),
+			duration: new UntypedFormControl(null, [Validators.required]),
 		});
 	}
 

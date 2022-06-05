@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
 	limit: number = 10;
 	page: number = 1;
 
-	searchFC = new FormControl();
+	searchFC = new UntypedFormControl();
 
 	constructor(private apiService: ApiService, private alertService: AlertDialogService, private cdr: ChangeDetectorRef) {
 		this.selectedRow = null;

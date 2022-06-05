@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 
 
@@ -11,10 +11,10 @@ import { ApiService } from 'src/app/services/api.service';
 export class SystemSettingsComponent implements OnInit {
 	menu: string[] = ['Website Configurations', 'Recent Annoucements'];
 	selectedMenu: string;
-	theForm: FormGroup;
+	theForm: UntypedFormGroup;
 	disableSaveBtn = false;
 
-	constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private fb: FormBuilder) {
+	constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private fb: UntypedFormBuilder) {
 		this.theForm = this.fb.group({
 			_id: [''],
 			logo: ['', Validators.required],

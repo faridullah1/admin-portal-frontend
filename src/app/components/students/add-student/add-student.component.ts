@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Helpers } from 'src/app/shared/helpers';
 import { Course } from 'src/app/common/models';
@@ -14,18 +14,18 @@ import { ApiService } from 'src/app/services/api.service';
 export class AddStudentComponent implements OnInit {
 	courses: Course[] = [];
 	id: string = null;
-	theForm: FormGroup;
+	theForm: UntypedFormGroup;
 
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<AddStudentComponent>) 
 	{
-		this.theForm = new FormGroup({
-			fullName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
-			fatherName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
-			mobileNo: new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-			cnic: new FormControl(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
-			dateOfBirth: new FormControl(null, [Validators.required]),
-			course: new FormControl(null, [Validators.required]),
-			address: new FormControl(null),
+		this.theForm = new UntypedFormGroup({
+			fullName: new UntypedFormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
+			fatherName: new UntypedFormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(55)]),
+			mobileNo: new UntypedFormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+			cnic: new UntypedFormControl(null, [Validators.required, Validators.minLength(13), Validators.maxLength(13)]),
+			dateOfBirth: new UntypedFormControl(null, [Validators.required]),
+			course: new UntypedFormControl(null, [Validators.required]),
+			address: new UntypedFormControl(null),
 		});
 	}
 

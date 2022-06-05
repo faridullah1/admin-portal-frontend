@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
@@ -15,13 +15,13 @@ export class FormComponent implements OnInit {
 	@Input() config: FormConfig;
 	@Input() id: string;
 
-	theForm = new FormGroup({});
+	theForm = new UntypedFormGroup({});
 	
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<FormComponent>) { }
 
 	ngOnInit(): void {
 		for (let field of this.config.fields) {
-			this.theForm.addControl(field.name, new FormControl());
+			this.theForm.addControl(field.name, new UntypedFormControl());
 			this.setValidators(field);
 		}
 
