@@ -125,7 +125,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/cdk@^14.0.0", "@angular/cdk@14.0.0":
+"@angular/cdk@^13.0.0", "@angular/cdk@^14.0.0", "@angular/cdk@14.0.0":
   "integrity" "sha512-9RnDlvskjXt1il9uWUidfHE98J9eYaVn+MCqhg0VLH1uHFcpt/dzoJ1nv71mC0anZHrClax29YMiEBnPFZaeFQ=="
   "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-14.0.0.tgz"
   "version" "14.0.0"
@@ -160,7 +160,7 @@
     "uuid" "8.3.2"
     "yargs" "17.4.1"
 
-"@angular/common@^14.0.0", "@angular/common@^14.0.0 || ^15.0.0", "@angular/common@14.0.0":
+"@angular/common@^13.0.0", "@angular/common@^14.0.0", "@angular/common@^14.0.0 || ^15.0.0", "@angular/common@14.0.0":
   "integrity" "sha512-VYydSXelPlcAnWZs6SKkOxV+rNe8zOtHKLf9jBTYT5nP5P66+va4zITo1C9bs5tbK+mRssayf615+SIGEXyJFg=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-14.0.0.tgz"
   "version" "14.0.0"
@@ -190,10 +190,17 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@14.0.0":
+"@angular/core@^13.0.0", "@angular/core@^14.0.0", "@angular/core@^14.0.0 || ^15.0.0", "@angular/core@14.0.0":
   "integrity" "sha512-Mj3r8iMlWfMbY+9DRUFZx1gKnA27Jwx3ff/VXeXBgfxaEKDYmlZSnliZSV6ssiHSUwn/U6yxDXFgcZL090zNBQ=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-14.0.0.tgz"
   "version" "14.0.0"
+  dependencies:
+    "tslib" "^2.3.0"
+
+"@angular/flex-layout@^13.0.0-beta.38":
+  "integrity" "sha512-kcWb7CcoHbvw7fjo/knizWVmSSmvaTnr8v1ML6zOdxu1PK9UPPOcOS8RTm6fy61zoC2LABivP1/6Z2jF5XfpdQ=="
+  "resolved" "https://registry.npmjs.org/@angular/flex-layout/-/flex-layout-13.0.0-beta.38.tgz"
+  "version" "13.0.0-beta.38"
   dependencies:
     "tslib" "^2.3.0"
 
@@ -218,7 +225,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/platform-browser@^14.0.0", "@angular/platform-browser@^14.0.0 || ^15.0.0", "@angular/platform-browser@14.0.0":
+"@angular/platform-browser@^13.0.0", "@angular/platform-browser@^14.0.0", "@angular/platform-browser@^14.0.0 || ^15.0.0", "@angular/platform-browser@14.0.0":
   "integrity" "sha512-zijIhUxu3nJxoI3mTWxs1d7dh9ovldI09diumlm/rOhj/46j4SvGn8swJvWr0eo/QipkdP+i2Q1lAlpmRfI+tQ=="
   "resolved" "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-14.0.0.tgz"
   "version" "14.0.0"
