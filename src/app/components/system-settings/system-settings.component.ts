@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 
 
@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class SystemSettingsComponent implements OnInit {
 	menu: string[] = ['Website Configurations', 'Recent Annoucements'];
 	selectedMenu: string;
-	theForm: UntypedFormGroup;
+	theForm: FormGroup;
 	disableSaveBtn = false;
 
 	constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private fb: UntypedFormBuilder) {
@@ -58,14 +58,14 @@ export class SystemSettingsComponent implements OnInit {
 		delete this.theForm.value['_id'];
 		
 		if (id != '') {
-			this.apiService.update('system_settings', this.theForm.value).subscribe(resp => {
+			this.apiService.update('system_settings', this.theForm.value).subscribe(() => {
 				this.disableSaveBtn = false;
 				this.cdr.detectChanges();
 			});
 		}
 		else 
 		{
-			this.apiService.post('system_settings', this.theForm.value).subscribe(resp => {
+			this.apiService.post('system_settings', this.theForm.value).subscribe(() => {
 				this.disableSaveBtn = false;
 				this.cdr.detectChanges();
 			});

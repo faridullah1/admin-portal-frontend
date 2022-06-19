@@ -8,19 +8,18 @@ import { tableFormat } from "../models";
 export class FormatDataPipe implements PipeTransform {
     constructor(private dateFormater: DatePipe, private numberFormater: DecimalPipe) {}
 
-    transform(value: any, format: tableFormat) {
-        if (format && format === 'date')
-        {
-            return this.dateFormater.transform(value, 'dd MMM YYYY');
-        }
-		else if (format && format === 'datetime')
-        {
-            return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
-        }
-		else if (format && format === 'number') {
-			return this.numberFormater.transform(value);
+    transform(value: any, format?: tableFormat) {
+		if (!format) return value;
+
+		switch(format) {
+			case 'date':
+				return this.dateFormater.transform(value, 'dd MMM YYYY');
+
+			case 'datetime':
+				return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
+
+			case 'number':
+				return this.numberFormater.transform(value);
 		}
-		
-        return value;
     }
 }

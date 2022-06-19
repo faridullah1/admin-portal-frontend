@@ -15,13 +15,13 @@
                     <mat-form-field appearance="outline" class="field" >
                         <mat-label>{{field.title}}</mat-label>
                         <input matInput [value]="timestampToDate(field.name)" 
-                            (dateChange)="onDateChange($event, theForm.get(field.name))"
+                            (dateChange)="onDateChange($event, field.name)"
                             [matDatepicker]="picker">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
 
-                        <mat-error *ngIf="theForm.get(field.name).invalid">
-                            <div *ngIf="theForm.get(field.name).errors['required']">
+                        <mat-error *ngIf="theForm.get(field.name)?.invalid">
+                            <div *ngIf="theForm.get(field.name)?.errors?.['required']">
                                 {{field.title}} is required.
                             </div>
                         </mat-error>
@@ -44,8 +44,8 @@
 								{{ opt }}
 							</mat-option>
 						</mat-select>
-						<mat-error *ngIf="theForm.get(field.name).invalid">
-							<div *ngIf="theForm.get(field.name).errors['required']">
+						<mat-error *ngIf="theForm.get(field.name)?.invalid">
+							<div *ngIf="theForm.get(field.name)?.errors?.['required']">
 								{{field.title}} is required.
 							</div>
 						</mat-error>
@@ -58,20 +58,20 @@
                         <input [type]="field.type" matInput 
                             [placeholder]="field.placeholder" 
                             [formControlName]="field.name">
-                        <mat-error *ngIf="theForm.get(field.name).invalid">
-                            <div *ngIf="theForm.get(field.name).errors['required']">
+                        <mat-error *ngIf="theForm.get(field.name)?.invalid">
+                            <div *ngIf="theForm.get(field.name)?.errors?.['required']">
                                 {{field.title}} is required.
                             </div>
 
-							<div *ngIf="theForm.get(field.name).errors['email']">
+							<div *ngIf="theForm.get(field.name)?.errors?.['email']">
                                 Please provide a valid email address.
                             </div>
 
-							<div *ngIf="theForm.get(field.name).errors['minlength']">
+							<div *ngIf="theForm.get(field.name)?.errors?.['minlength']">
                                 Min length for {{field.title}} is {{field.minLength}}.
                             </div>
 
-							<div *ngIf="theForm.get(field.name).errors['maxlength']">
+							<div *ngIf="theForm.get(field.name)?.errors?.['maxlength']">
                                 Max length for {{field.title}} is {{field.maxLength}}.
                             </div>
                         </mat-error>

@@ -60,7 +60,7 @@ export class CoursesComponent {
 		}
 	}
 
-	openForm(id = null): void {
+	openForm(id: string | null = null): void {
 		const dialog = this.dialog.open(AddCourseComponent, {
 			width: '30vw',
 			height: '80vh'
@@ -68,7 +68,7 @@ export class CoursesComponent {
 
 		if (id) dialog.componentInstance.id = id;
 
-		dialog.afterClosed().subscribe(resp => {
+		dialog.afterClosed().subscribe(() => {
 			this.actions.next({ type: 'reload' });
 		})
 	}

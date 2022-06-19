@@ -33,7 +33,7 @@ export class PageComponent implements OnInit {
 		}
 	}
 
-	openForm(id = null): void {
+	openForm(id: string | null = null): void {
 		const dialog = this.dialog.open(FormComponent, {
 			width: '30vw',
 			height: '80vh'
@@ -43,7 +43,7 @@ export class PageComponent implements OnInit {
 		
 		if (id) dialog.componentInstance.id = id;
 
-		dialog.afterClosed().subscribe(resp => {
+		dialog.afterClosed().subscribe(() => {
 			this.actions.next({ type: 'reload' });
 		})
 	}

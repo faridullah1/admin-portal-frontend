@@ -15,13 +15,13 @@ export class AlertDialogComponent {
 
 	onCancel(): void {
 		this.dialogRef.close();
-		this.alert.subject.next({ positive: false });
-		this.alert.subject.complete();
+		this.alert.subject?.next({ positive: false });
+		this.alert.subject?.complete();
 	}
 
 	onYes(): void {
 		this.dialogRef.close();
-		this.alert.subject.next({ positive: true });
-		this.alert.subject.complete();
+		this.alert.subject?.next({ positive: true });
+		this.alert.subject?.complete();
 	}
 }

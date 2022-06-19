@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
@@ -15,13 +15,13 @@ export class FormComponent implements OnInit {
 	@Input() config: FormConfig;
 	@Input() id: string;
 
-	theForm = new UntypedFormGroup({});
+	theForm = new FormGroup({});
 	
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<FormComponent>) { }
 
 	ngOnInit(): void {
 		for (let field of this.config.fields) {
-			this.theForm.addControl(field.name, new UntypedFormControl());
+			this.theForm.addControl(field.name, new FormControl());
 			this.setValidators(field);
 		}
 
@@ -49,7 +49,7 @@ export class FormComponent implements OnInit {
 
 		if (validators.length > 0)
 		{
-			this.theForm.get(field.name).setValidators(validators);
+			this.theForm.get(field.name)?.setValidators(validators);
 		}
 	}
 
@@ -65,11 +65,12 @@ export class FormComponent implements OnInit {
 	}
 
 	timestampToDate(fieldName: string): any {
-        const value = this.theForm.get(fieldName).value;
+        const value = this.theForm.get(fieldName)?.value;
         if (value) return new Date(value * 1000);
     }
 
-    onDateChange(event: MatDatepickerInputEvent<any>, control: AbstractControl): void {
+    onDateChange(event: MatDatepickerInputEvent<any>, fieldName: string): void {
+		const control = this.theForm.get(fieldName) as FormControl;
         control.setValue(event.value.valueOf() / 1000);
     }
 

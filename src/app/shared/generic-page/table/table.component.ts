@@ -1,6 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { WhereData } from './../models';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -33,11 +33,11 @@ export class TableComponent implements OnInit {
 	limit: number = 10;
 	page: number = 1;
 
-	searchFC = new UntypedFormControl();
+	searchFC = new FormControl();
 
-	constructor(private apiService: ApiService, private alertService: AlertDialogService, private cdr: ChangeDetectorRef) {
+	constructor(private apiService: ApiService, private alertService: AlertDialogService) {
 		this.selectedRow = null;
-		this.dataSource = new MatTableDataSource<any[]>();
+		this.dataSource = new MatTableDataSource();
 		this.loading = false;
 		this.displayedColumns = [];
 		this.pageSizeOptions = [10, 15, 20, 25];
@@ -65,7 +65,7 @@ export class TableComponent implements OnInit {
 		}
 	}
 
-	loadData(query = null): void {
+	loadData(query: string | null = null): void {
 		this.loading = true;
 		let queryString = `?page=${this.page}&limit=${this.limit}`;
 
@@ -80,14 +80,14 @@ export class TableComponent implements OnInit {
 
 		let slug = this.config.slug + queryString;
 
-		this.apiService.get(slug).subscribe((resp: GenericApiResponse) => {
-			this.loading = false;
-			this.dataSource.data = resp.data[this.config.slug];
-			this.dataSource.sort = this.sort;
-			this.totalRecords = resp.records;
-		}, (error: HttpErrorResponse) => {
-			this.loading = false;
-		});
+		this.apiService.get(slug).subscribe(
+			(resp: GenericApiResponse) => {
+				this.loading = false;
+				this.dataSource.data = resp.data[this.config.slug];
+				this.dataSource.sort = this.sort;
+				this.totalRecords = resp.records;
+			}, 
+			() => this.loading = false);
 	}
 
 	searchData(value: string) {
@@ -105,11 +105,11 @@ export class TableComponent implements OnInit {
 	}
 
 	handleWhere(): string {
-		const { column, search, op } = this.config.where;
+		const { column, search, op } = this.config.where as WhereData;
 
 		let queryString = `${column}[${op}]=${search}`;
 
-		if (this.config.where.op === 'eq') {
+		if (this.config?.where?.op === 'eq') {
 			queryString = `${column}=${search}`;
 		}
 
@@ -117,7 +117,7 @@ export class TableComponent implements OnInit {
 	}
 
 	onAdd(): void {
-		const signal = {
+		const signal: TableSignal = {
 			type: 'OpenForm',
 			row: null
 		}
@@ -134,9 +134,9 @@ export class TableComponent implements OnInit {
 		this.signal.emit(signal);
 
 		if (ac.action === 'OnDelete') {
-			this.alertService.confirm('Are you sure, you want to delete the record?').subscribe(resp => {
+			this.alertService.confirm('Are you sure, you want to delete the record?')?.subscribe(resp => {
 				if (resp.positive) {
-					this.apiService.delete(`${this.config.slug}/${this.selectedRow['_id']}`).subscribe(resp => {
+					this.apiService.delete(`${this.config.slug}/${this.selectedRow['_id']}`).subscribe(() => {
 						this.loadData();
 					});
 				}

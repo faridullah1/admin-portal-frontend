@@ -40,7 +40,7 @@ export class StudentsComponent {
 					{ name: 'dateOfBirth', title: 'dob', format: 'date' },
 					{ name: 'course.name', title: 'Course' },
 					{ name: 'course.teacher.fullName', title: 'Teacher' },
-					{ name: 'dateOfAdmission', title: 'Date of Addmission', format: 'datetime' },
+					{ name: 'dateOfAdmission', title: 'Date of Addmission', format: 'date' },
 					{ name: 'address', title: 'Address' },
 				]
 			},
@@ -69,7 +69,7 @@ export class StudentsComponent {
 		}
 	}
 
-	openForm(id = null): void {
+	openForm(id: string | null = null): void {
 		const dialog = this.dialog.open(AddStudentComponent, {
 			width: '30vw',
 			height: '80vh'
@@ -77,7 +77,7 @@ export class StudentsComponent {
 
 		if (id) dialog.componentInstance.id = id;
 
-		dialog.afterClosed().subscribe(resp => {
+		dialog.afterClosed().subscribe(() => {
 			this.actions.next({ type: 'reload' });
 		})
 	}

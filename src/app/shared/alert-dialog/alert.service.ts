@@ -9,7 +9,7 @@ import { AlertDialogComponent } from "./alert.component";
 export class AlertDialogService {
 	constructor(private dialog: MatDialog) {}
 
-	private addAlert(alert: Alert): Observable<AlertAction> {
+	private addAlert(alert: Alert): Observable<AlertAction> | undefined {
 		const alertInstance = new Alert(alert);
 
 		const dialogRef = this.dialog.open(AlertDialogComponent, {
@@ -18,20 +18,20 @@ export class AlertDialogService {
 
 		dialogRef.componentInstance.alert = alertInstance;
 
-		return alertInstance.subject.asObservable();
+		return alertInstance?.subject?.asObservable();
 	}
 
-	success(title: string): Observable<AlertAction> {
+	success(title: string): Observable<AlertAction> | undefined {
 		const alert: Alert = { type: 'success', title };
 		return this.addAlert(alert);
 	}
 
-	error(title: string, message: string): Observable<AlertAction> {
+	error(title: string, message: string): Observable<AlertAction > | undefined {
 		const alert: Alert = { type: 'error', title, message };
 		return this.addAlert(alert);
 	}
 
-	confirm(title: string): Observable<AlertAction> {
+	confirm(title: string): Observable<AlertAction> | undefined {
 		const alert: Alert = { type: 'confirm', title };
 		return this.addAlert(alert);
 	}

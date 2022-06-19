@@ -1,4 +1,3 @@
-import { DatePipe } from "@angular/common";
 import { Pipe, PipeTransform } from "@angular/core";
 
 
@@ -6,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
     name: 'nestedValue'
 })
 export class NestedValuePipe implements PipeTransform {
-    constructor(private dateFormater: DatePipe) {}
+    constructor() {}
 
     transform(value: any, col: string, row: any) {
 		const keys = col.split('.');

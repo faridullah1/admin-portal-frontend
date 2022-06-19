@@ -9,7 +9,7 @@ export interface NavigationConfig {
 export interface GenericApiResponse {
 	status: 'success' | 'fail',
 	data: any;
-	records?: number;
+	records: number;
 }
 
 export interface Course {
