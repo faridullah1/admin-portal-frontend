@@ -16,6 +16,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -38,8 +41,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatSelectModule,
 		MatCardModule,
 		MatDatepickerModule,
+		MatNativeDateModule,
 		MatSortModule,
 		MatProgressSpinnerModule,
+		MatCheckboxModule,
 
         FlexLayoutModule
     ],
@@ -58,8 +63,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatSelectModule,
 		MatCardModule,
 		MatDatepickerModule,
+		MatNativeDateModule,
 		MatSortModule,
 		MatProgressSpinnerModule,
+		MatCheckboxModule,
 
         FlexLayoutModule
     ]
