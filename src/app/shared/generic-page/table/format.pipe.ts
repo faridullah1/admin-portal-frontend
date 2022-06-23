@@ -20,6 +20,9 @@ export class FormatDataPipe implements PipeTransform {
 
 			case 'number':
 				return this.numberFormater.transform(value);
+
+			case 'boolean':
+				return value ? 'Yes' : 'No'
 		}
     }
 }

@@ -42,8 +42,16 @@
                         <ng-template #nonSortableHeader>
                             <th mat-header-cell *matHeaderCellDef> {{col.title}} </th>
                         </ng-template>
+
+						<ng-container *ngIf="col.format === 'image'; else nonImageCell">
+							<td mat-cell *matCellDef="let row">
+								<img [src]="row[col.name]" class="image">
+							</td>
+						</ng-container>
     
-                        <td mat-cell *matCellDef="let row"> {{ row[col.name] | nestedValue:col.name:row | format:col.format }} </td>
+						<ng-template #nonImageCell>
+							<td mat-cell *matCellDef="let row"> {{ row[col.name] | nestedValue:col.name:row | format:col.format }} </td>
+						</ng-template>
                     </ng-container>
                 </ng-container>
 

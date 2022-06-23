@@ -1,4 +1,4 @@
-export type tableFormat = 'number' | 'date' | 'datetime';
+export type tableFormat = 'number' | 'image' | 'boolean' | 'date' | 'datetime';
 export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'select' | 'date';
 
 export interface GenericPageConfig {
