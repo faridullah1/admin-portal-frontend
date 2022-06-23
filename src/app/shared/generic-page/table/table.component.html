@@ -45,7 +45,7 @@
 
 						<ng-container *ngIf="col.format === 'image'; else nonImageCell">
 							<td mat-cell *matCellDef="let row">
-								<img [src]="row[col.name]" class="image">
+								<img [src]="'assets/images/'+row[col.name]" class="image">
 							</td>
 						</ng-container>
     
