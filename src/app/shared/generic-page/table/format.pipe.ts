@@ -13,10 +13,13 @@ export class FormatDataPipe implements PipeTransform {
 
 		switch(format) {
 			case 'date':
-				return this.dateFormater.transform(value, 'dd MMM YYYY');
+				// incase of timestamp
+				const dateValue = typeof value === 'number' ? new Date(value).getTime() * 1000 : value;
+				return this.dateFormater.transform(dateValue, 'dd MMM YYYY');
 
 			case 'datetime':
-				return this.dateFormater.transform(value, 'dd MMM YYYY hh:mm');
+				const dateTimeValue = typeof value === 'number' ? new Date(value).getTime() * 1000 : value;
+				return this.dateFormater.transform(dateTimeValue, 'dd MMM YYYY hh:mm');
 
 			case 'number':
 				return this.numberFormater.transform(value);
