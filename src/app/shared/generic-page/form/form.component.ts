@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -12,16 +12,20 @@ import { FormConfig, FormField } from '../models';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+	@ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+
 	@Input() config: FormConfig;
 	@Input() id: string;
 
 	theForm = new FormGroup({});
+	files: File[] = [];
 	
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<FormComponent>) { }
 
 	ngOnInit(): void {
 		for (let field of this.config.fields) {
-			this.theForm.addControl(field.name, new FormControl());
+			const defaultValue = field.type === 'checkbox' ? false : null;
+			this.theForm.addControl(field.name, new FormControl(defaultValue));
 			this.setValidators(field);
 		}
 
@@ -74,9 +78,49 @@ export class FormComponent implements OnInit {
         control.setValue(event.value.valueOf() / 1000);
     }
 
+	onUpload(): void
+	{
+		this.fileInput.nativeElement.value = '';
+		this.fileInput.nativeElement.click();
+	}
+
+	onFileChange(fieldName: string): void
+	{
+		const files = this.fileInput.nativeElement.files;
+		if (files) {
+			for (let i=0; i<files.length; i++) 
+			{
+				const file = files.item(i) as File;
+				this.files.push(file);
+			}
+
+			if (this.files.length === 1) {
+				const formField = this.theForm.get(fieldName) as FormControl;
+				formField.setValue(this.files[0].name);
+			}
+		}
+	}
+
 	onSave(): void {
+		let payload = this.theForm.value;
+		if (this.files.length > 0) {
+			const formData = new FormData();
+
+			for (let field of this.config.fields) {
+				if (field.type === 'file') {
+					formData.append(field.name, this.files[0]);
+				}
+				else {
+					const fieldValue = this.theForm.get(field.name)?.value;
+					formData.append(field.name, fieldValue);
+				}
+			}
+
+			payload = formData;
+		}
+
 		if (this.id) {
-			this.apiService.update(`${this.config.slug}/${this.id}`, this.theForm.value).subscribe(resp => {
+			this.apiService.update(`${this.config.slug}/${this.id}`, payload).subscribe(resp => {
 				if (resp.data) {
 					this.dialogRef.close();
 				}
@@ -85,7 +129,7 @@ export class FormComponent implements OnInit {
 			});
 		}
 		else {
-			this.apiService.post(`${this.config.slug}`, this.theForm.value).subscribe(resp => {
+			this.apiService.post(`${this.config.slug}`, payload).subscribe(resp => {
 				if (resp.data) {
 					this.dialogRef.close();
 				}

@@ -1,5 +1,5 @@
 export type tableFormat = 'number' | 'image' | 'boolean' | 'date' | 'datetime';
-export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'checkbox' | 'select' | 'date';
+export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'checkbox' | 'select' | 'date' | 'file';
 
 export interface GenericPageConfig {
     tableConfig: TableConfig;
@@ -52,6 +52,10 @@ export interface FormField {
 	required?: boolean;
 	minLength?: number;
 	maxLength?: number;
+
+	// Incase of dates;
+	min?: number;
+	max?: number;
 	options?: any[];
 }
 

@@ -13,7 +13,7 @@ export class RecentAnnouncementsComponent {
 	constructor() {
 		this.announcementsConfig = {
 			tableConfig: {
-				title: 'Recent Announcements',
+				title: 'Announcements',
 				slug: 'announcements',
 	
 				showAdd: true,
@@ -41,9 +41,10 @@ export class RecentAnnouncementsComponent {
 				fields: [
 					{ name: 'title', title: 'Title', type: 'text', placeholder: 'Enter Title', required: true },
 					{ name: 'description', title: 'Description', type: 'text', placeholder: 'Enter Description', required: true },
+					{ name: 'image', title: 'Image', type: 'file', placeholder: 'Select a file' },
 					{ name: 'isExpired', title: 'Is Expired', type: 'checkbox', placeholder: 'Is Expired' },
 					{ name: 'isMain', title: 'Is Main heading', type: 'checkbox', placeholder: 'Is Main heading' },
-					{ name: 'expiryDate', title: 'Expiry date', type: 'date', placeholder: 'Expiry date', required: true }
+					{ name: 'expiryDate', title: 'Expiry date', type: 'date', placeholder: 'Expiry date', required: true, min: new Date().getTime()}
 				]
 			}
 		}

@@ -16,7 +16,8 @@
                         <mat-label>{{field.title}}</mat-label>
                         <input matInput [value]="timestampToDate(field.name)" 
                             (dateChange)="onDateChange($event, field.name)"
-                            [matDatepicker]="picker">
+                            [matDatepicker]="picker"
+							[min]="field.min">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
 
@@ -38,6 +39,17 @@
 
 				<ng-container *ngSwitchCase="'checkbox'">
 					<mat-checkbox class="mb-3" [formControlName]="field.name">{{field.placeholder}}</mat-checkbox>
+                </ng-container>
+
+				<ng-container *ngSwitchCase="'file'">
+					<input type="file" hidden #fileInput [accept]="'images/*'" (change)="onFileChange(field.name)">
+					
+					<mat-form-field appearance="outline">
+						<input type="text" matInput readonly [placeholder]="field.placeholder" [formControlName]="field.name">
+						<button type="button" mat-stroked-button color="primary" matSuffix 
+							class="btn-browse-file" (click)="onUpload()">Browse
+						</button>
+					</mat-form-field>
                 </ng-container>
 
 				<ng-container *ngSwitchCase="'select'">
