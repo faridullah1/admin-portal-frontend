@@ -21,6 +21,7 @@ import { AddCourseComponent } from './components/courses/add-course/add-course.c
 import { AlertDialogModule } from './shared/alert-dialog/alert.module';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 import { SystemSettingsComponent } from './components/system-settings/system-settings.component';
+import { RecentAnnouncementsComponent } from './components/announcements/announcements.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { SystemSettingsComponent } from './components/system-settings/system-set
 		CoursesComponent,
 		AddCourseComponent,
   		AllEmployeesComponent,
-    	SystemSettingsComponent
+    	SystemSettingsComponent,
+		RecentAnnouncementsComponent
     ],
     imports: [
         BrowserModule,

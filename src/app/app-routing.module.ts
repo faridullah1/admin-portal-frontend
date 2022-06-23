@@ -5,6 +5,7 @@ import { CoursesComponent } from './components/courses/course.component';
 import { StudentsComponent } from './components/students/students.component';
 import { SystemSettingsComponent } from './components/system-settings/system-settings.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
+import { RecentAnnouncementsComponent } from './components/announcements/announcements.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'courses', component: CoursesComponent },
   { path: 'employees', component: AllEmployeesComponent },
   { path: 'settings', component: SystemSettingsComponent },
+  { path: 'announcements', component: RecentAnnouncementsComponent },
 
   { path: '**', redirectTo: 'students', pathMatch: 'full' }
 ];

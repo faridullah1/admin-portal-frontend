@@ -28,5 +28,12 @@ export class Navigation {
             icon: 'people_alt',
             url: 'employees'
         },
+		{
+            name: 'announcements',
+            title: 'Announcements',
+            type: 'item',
+            icon: 'announcement',
+            url: 'announcements'
+        },
     ]
 }
