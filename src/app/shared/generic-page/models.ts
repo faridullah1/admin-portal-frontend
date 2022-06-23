@@ -1,5 +1,5 @@
 export type tableFormat = 'number' | 'image' | 'boolean' | 'date' | 'datetime';
-export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'select' | 'date';
+export type fieldType = 'text' | 'number' | 'email' | 'radio' | 'checkbox' | 'select' | 'date';
 
 export interface GenericPageConfig {
     tableConfig: TableConfig;

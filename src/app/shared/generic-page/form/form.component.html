@@ -36,6 +36,10 @@
                       </mat-radio-group>
                 </ng-container>
 
+				<ng-container *ngSwitchCase="'checkbox'">
+					<mat-checkbox class="mb-3" [formControlName]="field.name">{{field.placeholder}}</mat-checkbox>
+                </ng-container>
+
 				<ng-container *ngSwitchCase="'select'">
 					<mat-form-field appearance="outline">
 						<mat-label>{{field.title}}</mat-label>
