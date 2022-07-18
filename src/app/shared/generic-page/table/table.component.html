@@ -45,7 +45,7 @@
 
 						<ng-container *ngIf="col.format === 'image'; else nonImageCell">
 							<td mat-cell *matCellDef="let row">
-								<img [src]="'assets/images/'+row[col.name]" class="image">
+								<img [src]="row[col.name]" class="image">
 							</td>
 						</ng-container>
     
@@ -61,16 +61,16 @@
                     </th>
                 </ng-container>
 
-				<ng-container *ngIf="!loading">
-					<tr class="mat-row" *matNoDataRow>
-						<td class="mat-cell" colspan="100%">
-							  No data matching the filter
-						</td>
-					</tr>
-				</ng-container>
+				<ng-container matColumnDef="error">
+                    <td mat-cell *matCellDef="let row" colspan="100%">
+                        <h3>{{row.title}}</h3>
+                        <p>{{row.message}}</p>
+                    </td>
+                </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
                 <tr mat-header-row *matHeaderRowDef="['loading']; sticky: true;" style="height: 3px !important;"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['error']; when: showError"></tr>
                 
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
                     [class.selected]="row == selectedRow"

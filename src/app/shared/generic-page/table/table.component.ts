@@ -1,5 +1,5 @@
 import { WhereData } from './../models';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -32,10 +32,13 @@ export class TableComponent implements OnInit {
 	totalRecords: number;
 	limit: number = 10;
 	page: number = 1;
+	dataError = false;
 
 	searchFC = new FormControl();
 
-	constructor(private apiService: ApiService, private alertService: AlertDialogService) {
+	showError = () => this.dataError;
+
+	constructor(private apiService: ApiService, private alertService: AlertDialogService, private cdr: ChangeDetectorRef) {
 		this.selectedRow = null;
 		this.dataSource = new MatTableDataSource();
 		this.loading = false;
@@ -58,6 +61,7 @@ export class TableComponent implements OnInit {
 		if (this.config) {
 			for (let col of this.config.columns) {
 				if (col.visible == false) continue;
+
 				this.displayedColumns.push(col.name);
 			}
 			
@@ -86,8 +90,21 @@ export class TableComponent implements OnInit {
 				this.dataSource.data = resp.data[this.config.slug];
 				this.dataSource.sort = this.sort;
 				this.totalRecords = resp.records;
+				this.cdr.detectChanges();
+
+				if (this.totalRecords === 0)
+				{
+					this.dataError = true;
+					const r = {
+						title: 'No Record Found',
+						message: ''
+					};
+
+					this.dataSource.data = [r];
+				}
 			}, 
-			() => this.loading = false);
+			() => this.loading = false
+		);
 	}
 
 	searchData(value: string) {
