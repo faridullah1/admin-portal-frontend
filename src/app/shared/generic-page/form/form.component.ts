@@ -77,6 +77,7 @@ export class FormComponent implements OnInit {
     onDateChange(event: MatDatepickerInputEvent<any>, fieldName: string): void {
 		const control = this.theForm.get(fieldName) as FormControl;
         control.setValue(event.value.valueOf() / 1000);
+		this.theForm.markAsDirty();
     }
 
 	onUpload(): void
@@ -104,25 +105,27 @@ export class FormComponent implements OnInit {
 		this.theForm.markAsDirty();
 	}
 
+	makeFormData(): any {
+		const formData = new FormData();
+
+		for (let field of this.config.fields) {
+			if (field.type === 'file') {
+				formData.append(field.name, this.files[0]);
+			}
+			else {
+				const fieldValue = this.theForm.get(field.name)?.value;
+				formData.append(field.name, fieldValue);
+			}
+		}
+
+		return formData;
+	}
+
 	onSave(): void {
 		this.disableSaveBtn = true;
+
 		let payload = this.theForm.value;
-
-		if (this.files.length > 0) {
-			const formData = new FormData();
-
-			for (let field of this.config.fields) {
-				if (field.type === 'file') {
-					formData.append(field.name, this.files[0]);
-				}
-				else {
-					const fieldValue = this.theForm.get(field.name)?.value;
-					formData.append(field.name, fieldValue);
-				}
-			}
-
-			payload = formData;
-		}
+		if (this.files.length > 0) payload = this.makeFormData();
 
 		if (this.id) {
 			this.apiService.update(`${this.config.slug}/${this.id}`, payload).subscribe(
