@@ -98,9 +98,16 @@
 	</form>
 
 	<div fxLayoutAlign="end">
-		<button mat-raised-button color="warn" (click)="onReset()" class="btn-reset mr-3">Reset</button>
-        <button mat-raised-button color="primary" (click)="onSave()" 
-            [disabled]="theForm.invalid || !theForm.dirty">Save
+		<button mat-raised-button color="warn" [disabled]="!theForm.dirty" (click)="onReset()" class="btn-reset mr-3">
+			Reset
+		</button>
+        
+		<button mat-raised-button color="primary" (click)="onSave()" 
+            [disabled]="theForm.invalid || !theForm.dirty || disableSaveBtn">
+			<div style="display: flex; align-items: center;">
+				<mat-spinner *ngIf="disableSaveBtn" diameter="20" strokeWidth="3" style="margin-right: .7rem;"></mat-spinner>
+				<span>Save</span>
+			</div>
         </button>
 	</div>
 </div>

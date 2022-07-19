@@ -19,6 +19,7 @@ export class FormComponent implements OnInit {
 
 	theForm = new FormGroup({});
 	files: File[] = [];
+	disableSaveBtn = false;
 	
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<FormComponent>) { }
 
@@ -102,7 +103,9 @@ export class FormComponent implements OnInit {
 	}
 
 	onSave(): void {
+		this.disableSaveBtn = true;
 		let payload = this.theForm.value;
+
 		if (this.files.length > 0) {
 			const formData = new FormData();
 
@@ -120,22 +123,26 @@ export class FormComponent implements OnInit {
 		}
 
 		if (this.id) {
-			this.apiService.update(`${this.config.slug}/${this.id}`, payload).subscribe(resp => {
-				if (resp.data) {
-					this.dialogRef.close();
-				}
-			}, error => {
-				console.error(error);
-			});
+			this.apiService.update(`${this.config.slug}/${this.id}`, payload).subscribe(
+				resp => {
+					this.disableSaveBtn = false;
+					if (resp.data) {
+						this.dialogRef.close();
+					}
+				}, 
+				() => this.disableSaveBtn = false
+			);
 		}
 		else {
-			this.apiService.post(`${this.config.slug}`, payload).subscribe(resp => {
-				if (resp.data) {
-					this.dialogRef.close();
-				}
-			}, error => {
-				console.error(error);
-			});
+			this.apiService.post(`${this.config.slug}`, payload).subscribe(
+				resp => {
+					this.disableSaveBtn = false;
+					if (resp.data) {
+						this.dialogRef.close();
+					}
+				}, 
+				() => this.disableSaveBtn = false
+			);
 		}
 	}
 

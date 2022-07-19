@@ -25,7 +25,7 @@ export class TableComponent implements OnInit {
 	@ViewChild(MatSort) sort: MatSort;
 
 	selectedRow: any;
-	dataSource = new MatTableDataSource();
+	dataSource: any;
 	loading: boolean;
 	displayedColumns: string[];
 	pageSizeOptions: number[];
@@ -85,26 +85,30 @@ export class TableComponent implements OnInit {
 		let slug = this.config.slug + queryString;
 
 		this.apiService.get(slug).subscribe(
-			(resp: GenericApiResponse) => {
-				this.loading = false;
-				this.dataSource.data = resp.data[this.config.slug];
-				this.dataSource.sort = this.sort;
-				this.totalRecords = resp.records;
-				this.cdr.detectChanges();
-
-				if (this.totalRecords === 0)
-				{
-					this.dataError = true;
-					const r = {
-						title: 'No Record Found',
-						message: ''
-					};
-
-					this.dataSource.data = [r];
-				}
-			}, 
+			(resp: GenericApiResponse) => this.onAPIResponse(resp),
 			() => this.loading = false
 		);
+	}
+
+	onAPIResponse(resp: GenericApiResponse): void {
+		this.loading = false;
+		this.dataError = false;
+		this.dataSource = resp.data[this.config.slug];
+		this.dataSource.sort = this.sort;
+		this.totalRecords = resp.records;
+
+		if (this.totalRecords === 0)
+		{
+			this.dataError = true;
+			const r = {
+				title: 'No Record Found',
+				message: ''
+			};
+
+			this.dataSource = [r];
+		}
+
+		this.cdr.detectChanges();
 	}
 
 	searchData(value: string) {
