@@ -43,8 +43,8 @@ export class PageComponent implements OnInit {
 		
 		if (id) dialog.componentInstance.id = id;
 
-		dialog.afterClosed().subscribe(() => {
-			this.actions.next({ type: 'reload' });
+		dialog.afterClosed().subscribe((reloadRequired) => {
+			if (reloadRequired) this.actions.next({ type: 'reload' });
 		})
 	}
 }

@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column">
 	<div fxLayout="row" fxLayoutAlign="space-between center">
 		<h2 style="margin: 0;">{{id ? 'Update' : 'Add'}} {{config.title}}</h2>
-		<button mat-icon-button matDialogClose>
+		<button mat-icon-button (click)="onDialogClose()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</div>

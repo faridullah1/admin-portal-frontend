@@ -129,7 +129,7 @@ export class FormComponent implements OnInit {
 				resp => {
 					this.disableSaveBtn = false;
 					if (resp.data) {
-						this.dialogRef.close();
+						this.onDialogClose(true)
 					}
 				}, 
 				() => this.disableSaveBtn = false
@@ -140,7 +140,7 @@ export class FormComponent implements OnInit {
 				resp => {
 					this.disableSaveBtn = false;
 					if (resp.data) {
-						this.dialogRef.close();
+						this.onDialogClose(true)
 					}
 				}, 
 				() => this.disableSaveBtn = false
@@ -150,5 +150,9 @@ export class FormComponent implements OnInit {
 
 	onReset(): void {
 		this.theForm.reset();
+	}
+
+	onDialogClose(reloadRequired = false): void {
+		this.dialogRef.close(reloadRequired);
 	}
 }
