@@ -100,6 +100,8 @@ export class FormComponent implements OnInit {
 				formField.setValue(this.files[0].name);
 			}
 		}
+
+		this.theForm.markAsDirty();
 	}
 
 	onSave(): void {

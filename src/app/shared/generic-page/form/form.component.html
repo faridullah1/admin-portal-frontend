@@ -45,7 +45,7 @@
 					<input type="file" hidden #fileInput [accept]="'images/*'" (change)="onFileChange(field.name)">
 					
 					<mat-form-field appearance="outline">
-						<input type="text" matInput readonly [placeholder]="field.placeholder" [formControlName]="field.name">
+						<input type="text" class="overflow" matInput readonly [placeholder]="field.placeholder" [formControlName]="field.name">
 						<button type="button" mat-stroked-button color="primary" matSuffix 
 							class="btn-browse-file" (click)="onUpload()">Browse
 						</button>
