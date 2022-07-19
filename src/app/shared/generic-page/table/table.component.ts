@@ -170,6 +170,11 @@ export class TableComponent implements OnInit {
 	}
 
 	onRowClick(row: any): void {
+		if (row === this.selectedRow) {
+			this.selectedRow = null;
+			return;
+		}
+
 		this.selectedRow = row;
 	}
 
