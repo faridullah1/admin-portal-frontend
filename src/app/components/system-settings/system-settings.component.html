@@ -51,21 +51,47 @@
 					</mat-form-field>
 				</div>
 
-				<mat-form-field appearance="outline" class="width-h-p">
-					<mat-label>Principle Message</mat-label>
-					<textarea type="text" rows="4" matInput placeholder="Principle Message" formControlName="principleMessage"></textarea>
-					<mat-error *ngIf="theForm.controls['principleMessage'].errors">
-						<div *ngIf="theForm.controls['principleMessage'].hasError('required')">Principle Message is required.</div>
-					</mat-error>
-				</mat-form-field>
+				<div>
+					<div class="avatar-container">
+						<img [src]="theForm.controls['principleImage'].value || '/assets/images/avatar.jpg'" 
+							alt="Principle Image" class="rounded-image">
+						<input class="form-upload" type="file" accept="image/*" #principleImageInput (change)="onFileChange()">
+						<label class="btn-text" (click)="onUploadFile('principle')">
+							Choose principle photo
+						</label>
+					</div>
 
-				<mat-form-field appearance="outline" class="width-h-p">
-					<mat-label>Introduction</mat-label>
-					<textarea type="text" rows="4" matInput placeholder="Introduction" formControlName="introduction"></textarea>
-					<mat-error *ngIf="theForm.controls['introduction'].errors">
-						<div *ngIf="theForm.controls['introduction'].hasError('required')">>Introduction is required.</div>
-					</mat-error>
-				</mat-form-field>
+					<mat-form-field appearance="outline" class="width-h-p">
+						<mat-label>Principle Message</mat-label>
+						<textarea type="text" rows="4" matInput placeholder="Principle Message" formControlName="principleMessage"></textarea>
+						<mat-error *ngIf="theForm.controls['principleMessage'].errors">
+							<div *ngIf="theForm.controls['principleMessage'].hasError('required')">
+								Principle Message is required.
+							</div>
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div>
+					<div class="avatar-container">
+						<img [src]="theForm.controls['introductionImage'].value || '/assets/images/avatar.jpg'" 
+							alt="Principle Image" class="rounded-image">
+						<input class="form-upload" type="file" accept="image/*" #introductionImageInput (change)="onFileChange()">
+						<label class="btn-text" (click)="onUploadFile('introduction')">
+							Choose introductory photo
+						</label>
+					</div>
+
+					<mat-form-field appearance="outline" class="width-h-p">
+						<mat-label>Introduction</mat-label>
+						<textarea type="text" rows="4" matInput placeholder="Introduction" formControlName="introduction"></textarea>
+						<mat-error *ngIf="theForm.controls['introduction'].errors">
+							<div *ngIf="theForm.controls['introduction'].hasError('required')">
+								Introduction is required.
+							</div>
+						</mat-error>
+					</mat-form-field>
+				</div>
 			</form>
 
 			<div fxLayoutAlign="end">
@@ -76,10 +102,6 @@
 					</div>
 				</button>
 			</div>
-		</ng-container>
-
-		<ng-container *ngIf="selectedMenu === 'Recent Annoucements'">
-			Recent Annoucements
 		</ng-container>
 	</section>
 </mat-card>
