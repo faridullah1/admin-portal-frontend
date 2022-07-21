@@ -11,6 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 export class SystemSettingsComponent implements OnInit {
 	@ViewChild('principleImageInput') principleImageInput: ElementRef<HTMLInputElement>;
 	@ViewChild('introductionImageInput') introductionImageInput: ElementRef<HTMLInputElement>;
+	@ViewChild('logoInput') logoInput: ElementRef<HTMLInputElement>;
 
 	menu: string[] = ['Website Configurations'];
 	selectedMenu: string;
@@ -20,7 +21,7 @@ export class SystemSettingsComponent implements OnInit {
 	constructor(private apiService: ApiService, private cdr: ChangeDetectorRef, private fb: UntypedFormBuilder) {
 		this.theForm = this.fb.group({
 			_id: [''],
-			logo: ['', Validators.required],
+			logo: [''],
 			academyName: ['', Validators.required],
 			address: ['', Validators.required],
 			email: ['', Validators.required],
@@ -51,15 +52,19 @@ export class SystemSettingsComponent implements OnInit {
 		this.selectedMenu = menuItem;
 	}
 
-	onUploadFile(type: 'introduction' | 'principle'): void
+	onUploadFile(type: 'introduction' | 'principle' | 'logo'): void
 	{
 		if (type === 'principle') {
 			this.principleImageInput.nativeElement.value = '';
 			this.principleImageInput.nativeElement.click();
 		}
-		else {
+		else if (type === 'introduction') {
 			this.introductionImageInput.nativeElement.value = '';
 			this.introductionImageInput.nativeElement.click();
+		}
+		else {
+			this.logoInput.nativeElement.value = '';
+			this.logoInput.nativeElement.click();
 		}
 	}
 
@@ -70,7 +75,7 @@ export class SystemSettingsComponent implements OnInit {
 	makeFormData(): FormData {
 		const formData = new FormData();
 		for (let key in this.theForm.value) {
-			if (['principleImage', 'introductionImage'].includes(key)) continue;
+			if (['principleImage', 'introductionImage', 'logo'].includes(key)) continue;
 
 			formData.append(key, this.theForm.get(key)?.value);
 		}
@@ -81,6 +86,10 @@ export class SystemSettingsComponent implements OnInit {
 
 		if (this.introductionImageInput.nativeElement.files?.item(0)) {
 			formData.append('introductionImage', this.introductionImageInput.nativeElement.files[0]);
+		}
+
+		if (this.logoInput.nativeElement.files?.item(0)) {
+			formData.append('logo', this.logoInput.nativeElement.files[0]);
 		}
 
 		return formData;
@@ -104,6 +113,7 @@ export class SystemSettingsComponent implements OnInit {
 		{
 			this.apiService.post('system_settings', payload).subscribe(() => {
 				this.disableSaveBtn = false;
+				this.getSystemSettings();
 				this.cdr.detectChanges();
 			});
 		}

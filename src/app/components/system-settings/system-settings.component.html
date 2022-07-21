@@ -9,9 +9,16 @@
 
 	<section class="detail">
 		<ng-container *ngIf="selectedMenu === 'Website Configurations'">
-			<div class="logo-container">
-				<img src="/assets/images/logo.jpg" alt="Logo" class="logo">
-				<div class="name">{{ theForm.controls['academyName'].value }}</div>
+			<div fxLayoutAlign="start center">
+				<img [src]="theForm.controls['logo'].value || '/assets/images/logo.jpg'" 
+					alt="Academy logo" class="logo">
+				<input class="form-upload" type="file" accept="image/*" #logoInput (change)="onFileChange()">
+				
+				<div fxLayout="column">
+					<label class="btn-text" (click)="onUploadFile('logo')">
+						Choose academy logo
+					</label>
+				</div>
 			</div>
 
 			<form [formGroup]="theForm" class="settings-form">
@@ -75,7 +82,7 @@
 				<div>
 					<div class="avatar-container">
 						<img [src]="theForm.controls['introductionImage'].value || '/assets/images/avatar.jpg'" 
-							alt="Principle Image" class="rounded-image">
+							alt="Introduction Image" class="rounded-image">
 						<input class="form-upload" type="file" accept="image/*" #introductionImageInput (change)="onFileChange()">
 						<label class="btn-text" (click)="onUploadFile('introduction')">
 							Choose introductory photo
