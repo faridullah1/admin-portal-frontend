@@ -1,3 +1,4 @@
+import { GenericApiResponse } from 'src/app/common/models';
 import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
@@ -41,10 +42,11 @@ export class SystemSettingsComponent implements OnInit {
 	}
 
 	getSystemSettings(): void {
-		this.apiService.get('system_settings').subscribe(resp => {
-			this.theForm.patchValue(resp.data['systemSettings']);
-			this.cdr.detectChanges();
-			console.log(this.theForm.value);
+		this.apiService.get('system_settings').subscribe({
+			next: (resp: GenericApiResponse) => {
+				this.theForm.patchValue(resp.data['systemSettings']);
+				this.cdr.detectChanges();
+			}
 		});
 	}
 
@@ -103,19 +105,27 @@ export class SystemSettingsComponent implements OnInit {
 		const payload = this.makeFormData();
 
 		if (id) {
-			this.apiService.update('system_settings', payload).subscribe(() => {
-				this.disableSaveBtn = false;
-				this.getSystemSettings();
-				this.cdr.detectChanges();
+			this.apiService.update('system_settings', payload).subscribe({
+				complete: () => this.onApiResponse(),
+				error: () => this.disableSaveBtn = false
 			});
 		}
 		else 
 		{
-			this.apiService.post('system_settings', payload).subscribe(() => {
-				this.disableSaveBtn = false;
-				this.getSystemSettings();
-				this.cdr.detectChanges();
+			this.apiService.post('system_settings', payload).subscribe({
+				complete: () => this.onApiResponse(),
+				error: () => this.disableSaveBtn = false
 			});
 		}
+	}
+
+	onApiResponse(): void {
+		this.disableSaveBtn = false;
+		this.getSystemSettings();
+		this.cdr.detectChanges();
+
+		this.logoInput.nativeElement.value = '';
+		this.principleImageInput.nativeElement.value = '';
+		this.introductionImageInput.nativeElement.value = '';
 	}
 }
