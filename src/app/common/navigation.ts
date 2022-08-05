@@ -35,5 +35,12 @@ export class Navigation {
             icon: 'announcement',
             url: 'announcements'
         },
+		{
+            name: 'queries',
+            title: 'Queries',
+            type: 'item',
+            icon: 'query_stats',
+            url: 'queries'
+        },
     ]
 }

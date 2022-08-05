@@ -1,3 +1,4 @@
+import { UserQueriesComponent } from './components/user-queries/user-queries.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'employees', component: AllEmployeesComponent },
   { path: 'settings', component: SystemSettingsComponent },
   { path: 'announcements', component: RecentAnnouncementsComponent },
+  { path: 'queries', component: UserQueriesComponent },
 
   { path: '**', redirectTo: 'students', pathMatch: 'full' }
 ];

@@ -22,6 +22,7 @@ import { AlertDialogModule } from './shared/alert-dialog/alert.module';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 import { SystemSettingsComponent } from './components/system-settings/system-settings.component';
 import { RecentAnnouncementsComponent } from './components/announcements/announcements.component';
+import { UserQueriesComponent } from './components/user-queries/user-queries.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { RecentAnnouncementsComponent } from './components/announcements/announc
 		AddCourseComponent,
   		AllEmployeesComponent,
     	SystemSettingsComponent,
-		RecentAnnouncementsComponent
+		RecentAnnouncementsComponent,
+  		UserQueriesComponent
     ],
     imports: [
         BrowserModule,
