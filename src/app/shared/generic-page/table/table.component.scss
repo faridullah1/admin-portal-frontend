@@ -52,6 +52,16 @@
         .selected {
             background-color: #a3a3a3 !important;
         }
+
+		.error-cell {
+			.error-title {
+				margin: 0;
+			}
+			
+			.error-msg {
+				font-size: .8rem;
+			}
+		}
     }
 
     ::ng-deep .mat-sort-header-arrow {

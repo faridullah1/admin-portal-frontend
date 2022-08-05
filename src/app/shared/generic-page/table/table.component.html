@@ -62,9 +62,9 @@
                 </ng-container>
 
 				<ng-container matColumnDef="error">
-                    <td mat-cell *matCellDef="let row" colspan="100%">
-                        <h3 style="margin: 0;">{{row.title}}</h3>
-                        <p *ngIf="row.message">{{row.message}}</p>
+                    <td class="error-cell" mat-cell *matCellDef="let row" colspan="100%">
+                        <h3 class="error-title">{{row.title}}</h3>
+                        <p class="error-msg" *ngIf="row.message">{{row.message}}</p>
                     </td>
                 </ng-container>
 

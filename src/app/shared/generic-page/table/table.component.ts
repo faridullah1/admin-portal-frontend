@@ -84,10 +84,20 @@ export class TableComponent implements OnInit {
 
 		let slug = this.config.slug + queryString;
 
-		this.apiService.get(slug).subscribe(
-			(resp: GenericApiResponse) => this.onAPIResponse(resp),
-			() => this.loading = false
-		);
+		this.apiService.get(slug).subscribe({
+			next: (resp: GenericApiResponse) => this.onAPIResponse(resp),
+			error: (error) => {
+				this.loading = false;
+				this.dataError = true;
+				const r = {
+					title: 'Error loading data',
+					message: error.message
+				};
+
+				this.dataSource = [r];
+				this.cdr.detectChanges();
+			}
+		});
 	}
 
 	onAPIResponse(resp: GenericApiResponse): void {
