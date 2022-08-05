@@ -1,3 +1,4 @@
+import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserQueriesComponent } from './components/user-queries/user-queries.component';
 import { NgModule } from '@angular/core';
@@ -11,17 +12,23 @@ import { RecentAnnouncementsComponent } from './components/announcements/announc
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'students', pathMatch: 'full' },
-  { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
-  { path: 'teachers', component: TeachersComponent, canActivate: [AuthGuard] },
-  { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
-  { path: 'employees', component: AllEmployeesComponent, canActivate: [AuthGuard] },
-  { path: 'settings', component: SystemSettingsComponent, canActivate: [AuthGuard] },
-  { path: 'announcements', component: RecentAnnouncementsComponent, canActivate: [AuthGuard] },
-  { path: 'queries', component: UserQueriesComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-
-  { path: '**', redirectTo: 'students', pathMatch: 'full' }
+	{
+		path: '',
+		component: MainLayoutComponent,
+		canActivate: [AuthGuard],
+		children: [
+			{ path: '', redirectTo: 'students', pathMatch: 'prefix' },
+			{ path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+			{ path: 'teachers', component: TeachersComponent, canActivate: [AuthGuard] },
+			{ path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
+			{ path: 'employees', component: AllEmployeesComponent, canActivate: [AuthGuard] },
+			{ path: 'settings', component: SystemSettingsComponent, canActivate: [AuthGuard] },
+			{ path: 'announcements', component: RecentAnnouncementsComponent, canActivate: [AuthGuard] },
+			{ path: 'queries', component: UserQueriesComponent, canActivate: [AuthGuard] },
+		]
+	},
+	{ path: 'login', component: LoginComponent },
+	{ path: '**', redirectTo: 'students', pathMatch: 'full' }
 ];
 
 
