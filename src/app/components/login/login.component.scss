@@ -1,0 +1,21 @@
+.container {
+	height: 100%;
+
+	.login-form {
+		width: 35%;
+		padding: 3rem 2rem;
+		position: relative;
+		border: 1px solid #e6dbdb;
+		border-radius: 12px;
+	}
+
+	.logo {
+		width: 100px;
+		height: 100px;
+		border-radius: 100%;
+		position: absolute;
+		top: -50px;
+		right: 40%;
+		box-shadow: 1px 1px 10px #cacaca;
+	}
+}

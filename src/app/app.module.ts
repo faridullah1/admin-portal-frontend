@@ -23,6 +23,7 @@ import { AllEmployeesComponent } from './components/all-employees/all-employees.
 import { SystemSettingsComponent } from './components/system-settings/system-settings.component';
 import { RecentAnnouncementsComponent } from './components/announcements/announcements.component';
 import { UserQueriesComponent } from './components/user-queries/user-queries.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { UserQueriesComponent } from './components/user-queries/user-queries.com
   		AllEmployeesComponent,
     	SystemSettingsComponent,
 		RecentAnnouncementsComponent,
-  		UserQueriesComponent
+  		UserQueriesComponent,
+    	LoginComponent
     ],
     imports: [
         BrowserModule,

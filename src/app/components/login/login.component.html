@@ -1,0 +1,27 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+	<form class="login-form" [formGroup]="theForm" fxLayout="column">
+		<img src="assets/images/logo.jpg" alt="Logo" class="logo">
+
+		<mat-form-field appearance="outline" class="mb-3 mt-3">
+			<mat-label>Email</mat-label>
+			<input type="email" matInput placeholder="Email" formControlName="email" required>
+			<mat-error *ngIf="theForm.get('email')?.hasError('required')">
+				Email is required
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline" class="mb-3">
+			<mat-label>Password</mat-label>
+			<input type="password" matInput placeholder="Password" formControlName="password">
+			<mat-error *ngIf="theForm.get('password')?.hasError('required')">
+				Password is required
+			</mat-error>
+		</mat-form-field>
+
+		<div fxFlex fxLayoutAlign="end">
+			<button mat-raised-button color="primary" 
+				[disabled]="theForm.invalid || disableBtn" (click)="onSubmit()">Login
+			</button>
+		</div>
+	</form>
+</div>
