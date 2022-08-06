@@ -4,8 +4,14 @@
             <mat-icon>settings</mat-icon>
         </div>
 
-        <div class="toolbar-nav-item" fxLayoutAlign="center center">
+		<div class="toolbar-nav-item" fxLayoutAlign="center center" [matMenuTriggerFor]="userMenu">
             <img src="/assets/images/avatar.jpg" alt="Avatar" class="avatar">
-        </div>    
+			<div class="user-name">Farid ullah</div>
+        </div>
+		
+		<mat-menu #userMenu="matMenu">
+			<!-- <button mat-menu-item>Profile</button> -->
+			<button mat-menu-item (click)="onLogout()">Logout</button>
+		</mat-menu>
     </nav>
 </mat-toolbar>

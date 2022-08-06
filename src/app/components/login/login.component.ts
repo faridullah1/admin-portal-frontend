@@ -24,7 +24,7 @@ export class LoginComponent {
 	onSubmit(): void {
 		this.disableBtn = true;
 
-		this.authService.post('auth/login', this.theForm.value).subscribe({
+		this.authService.login('auth/login', this.theForm.value).subscribe({
 			next: (resp: GenericApiResponse) => {
 				const token = resp.data.token;
 				localStorage.setItem('token', token);

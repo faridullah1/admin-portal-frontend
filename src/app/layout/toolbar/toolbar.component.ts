@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Navigation } from 'src/app/common/navigation';
 import { Menu } from '../models';
@@ -12,7 +13,11 @@ import { Menu } from '../models';
 export class ToolbarComponent {
 	navigation: Menu[];
 
-  constructor() {
+  	constructor(private authService: AuthService) {
 		this.navigation = Navigation.menu;
+	}
+
+	onLogout(): void {
+		this.authService.logout();
 	}
 }

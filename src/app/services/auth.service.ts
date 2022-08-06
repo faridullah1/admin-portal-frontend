@@ -16,8 +16,14 @@ export class AuthService {
 				private alertService: AlertDialogService,
 				private router: Router) { }
 
-	post(slug: string, payload: any): Observable<GenericApiResponse> {
+	login(slug: string, payload: any): Observable<GenericApiResponse> {
 		return this.http.post<GenericApiResponse>(this.baseUrl + slug, payload).pipe(catchError((error) => this.handleError(error)));
+	}
+
+	logout(): void {
+		localStorage.removeItem('token');
+		this.router.navigateByUrl('/');
+		location.reload();
 	}
 
 	private handleError(err: HttpErrorResponse) {
