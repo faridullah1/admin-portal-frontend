@@ -18,6 +18,8 @@ export class RecentAnnouncementsComponent {
 	
 				showAdd: true,
 				showSearch: true,
+
+				searchColumn: 'title',
 	
 				rowActions: [
 					{name: 'edit', title: 'Edit', action: 'OnEdit' },

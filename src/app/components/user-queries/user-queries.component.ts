@@ -17,6 +17,8 @@ export class UserQueriesComponent {
 			showAdd: false,
 			showSearch: true,
 
+			searchColumn: 'name',
+
 			rowActions: [
 				{name: 'delete', title: 'Delete', action: 'OnDelete' }
 			],

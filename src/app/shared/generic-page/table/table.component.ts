@@ -156,6 +156,10 @@ export class TableComponent implements OnInit {
 		this.signal.emit(signal);
 	}
 
+	onRefreshData(): void {
+		this.searchData(this.searchFC.value);
+	}
+
 	onRowAction(ac: TableRowAction): void {
 		const signal = {
 			type: ac.action,

@@ -77,8 +77,10 @@
 			border-radius: 4px;
 		}
 	
-		:host ::ng-deep .search-field .mat-form-field-wrapper {
-			padding: 0 !important;
+		.search-field {
+			::ng-deep .mat-form-field-wrapper {
+				padding-bottom: 0 !important;
+			}
 		}
 	
 		.image {

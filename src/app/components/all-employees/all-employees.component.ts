@@ -19,6 +19,8 @@ export class AllEmployeesComponent implements OnInit {
 	
 				showAdd: true,
 				showSearch: true,
+
+				searchColumn: 'fullName',
 	
 				rowActions: [
 					{name: 'edit', title: 'Edit', action: 'OnEdit' },
