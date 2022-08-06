@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MainLayoutComponent } from './layout/main-layout/layout.component';
 import { DrawerComponent } from './layout/drawer/drawer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddStudentComponent } from './components/students/add-student/add-student.component';
 import { GenericPageModule } from './shared/generic-page/module';
 import { CoursesComponent } from './components/courses/course.component';
@@ -24,7 +24,11 @@ import { SystemSettingsComponent } from './components/system-settings/system-set
 import { RecentAnnouncementsComponent } from './components/announcements/announcements.component';
 import { UserQueriesComponent } from './components/user-queries/user-queries.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+export const httpInterceptorProviders = [
+	{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+];
 
 @NgModule({
     declarations: [
@@ -56,7 +60,7 @@ import { LoginComponent } from './components/login/login.component';
 		GenericPageModule,
 		AlertDialogModule
     ],
-    providers: [DatePipe, DecimalPipe],
+    providers: [DatePipe, DecimalPipe, httpInterceptorProviders],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

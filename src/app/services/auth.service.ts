@@ -26,6 +26,11 @@ export class AuthService {
 		location.reload();
 	}
 
+	getToken(): string | null {
+		const token = localStorage.getItem('token');
+		return token;
+	}
+
 	private handleError(err: HttpErrorResponse) {
 		if (err.status === 401) {
 			this.router.navigateByUrl('login');
