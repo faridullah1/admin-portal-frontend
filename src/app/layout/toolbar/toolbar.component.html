@@ -5,8 +5,8 @@
         </div>
 
 		<div class="toolbar-nav-item" fxLayoutAlign="center center" [matMenuTriggerFor]="userMenu">
-            <img src="/assets/images/avatar.jpg" alt="Avatar" class="avatar">
-			<div class="user-name">Farid ullah</div>
+            <img [src]="user?.photo || '/assets/images/avatar.jpg'" alt="Avatar" class="avatar">
+			<div class="user-name">{{ user?.name }}</div>
         </div>
 		
 		<mat-menu #userMenu="matMenu">

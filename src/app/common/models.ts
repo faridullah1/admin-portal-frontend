@@ -44,3 +44,9 @@ export interface SystemSetting {
 	principleImage: string;
 	principleMessage: string;
 }
+
+export interface User {
+	name: string;
+	email: string;
+	photo: string;
+}
