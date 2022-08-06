@@ -21,6 +21,6 @@ export class MainLayoutComponent {
 	}
 
 	onDrawerToggle(isOpen: boolean): void {
-		this.drawerWidth = isOpen ? 15 : 2;
+		this.drawerWidth = isOpen ? 15 : 3;
 	}
 }

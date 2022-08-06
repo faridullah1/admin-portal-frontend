@@ -3,17 +3,21 @@
         <mat-icon>{{isOpen ? 'west' : 'east'}}</mat-icon>
     </button>
 
-    <div fxLayout="column" *ngIf="isOpen" style="height: 100%;">
+    <div fxLayout="column" style="height: 100%;">
         <div class="logo-container" fxLayoutAlign="center end">
-            <img src="/assets/images/logo.jpg" class="logo" alt="logo">
+            <img src="/assets/images/logo.jpg" class="logo" alt="logo" *ngIf="isOpen">
         </div>
 
         <nav class="navigation" fxLayout="row" fxLayoutAlign="space-between center">
             <ul fxLayout="column">
                 <li *ngFor="let m of navigation" fxLayoutAlign="start center"
-                    routerLinkActive="active" [routerLink]="m.url">
-                    <mat-icon class="nav-icon">{{m.icon}}</mat-icon>
-                    {{m.title}}
+                    routerLinkActive="active" [routerLink]="m.url" 
+					[ngClass]="isOpen ? 'icon-expanded' : 'icon-collapsed'"
+					[matTooltip]="m.title" matTooltipPosition="above" [matTooltipDisabled]="isOpen">
+                    
+					<mat-icon class="nav-icon" [class.right-margin]="isOpen">{{m.icon}}</mat-icon>
+                    
+					<span *ngIf="isOpen">{{m.title}}</span>
                 </li>
             </ul>
         </nav>

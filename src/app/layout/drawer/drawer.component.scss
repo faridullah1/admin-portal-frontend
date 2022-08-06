@@ -15,7 +15,7 @@
         height: 15%;
 
         .logo {
-            height: 80%;
+            width: 5rem;
             margin-bottom: 10px;
         }
     }
@@ -29,15 +29,25 @@
     
         ul li {
             cursor: pointer;
-            padding: 10px 25px;
             font-size: 14px;
             font-weight: 500;
         }
 
         .nav-icon {
-            margin-right: 20px;
             color: #afa7a7;
         }
+
+		.right-margin {
+            margin-right: 20px;
+		}
+
+		.icon-expanded {
+			padding: 10px 25px;
+		}
+
+		.icon-collapsed {
+			padding: 10px 5px;
+		}
 
         .active {
             background-color: #e5f1fa;

@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -46,6 +47,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatProgressSpinnerModule,
 		MatCheckboxModule,
 		MatMenuModule,
+		MatTooltipModule,
 
         FlexLayoutModule
     ],
@@ -69,6 +71,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatProgressSpinnerModule,
 		MatCheckboxModule,
 		MatMenuModule,
+		MatTooltipModule,
 
         FlexLayoutModule
     ]
