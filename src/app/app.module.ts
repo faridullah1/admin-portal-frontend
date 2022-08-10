@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { StudentsComponent } from './components/students/students.component';
-import { FooterComponent } from './layout/footer/footer.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -35,7 +34,6 @@ export const httpInterceptorProviders = [
         AppComponent,
         ToolbarComponent,
         StudentsComponent,
-        FooterComponent,
         TeachersComponent,
         MainLayoutComponent,
         DrawerComponent,
