@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
-import { GenericApiResponse } from './../../common/models';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { GenericApiResponse } from '@common/models';
 
 
 @Component({

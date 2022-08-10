@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NavigationConfig } from 'src/app/common/models';
-import { NAVIGATION_CONFIG } from 'src/app/common/navigation-config';
+import { NavigationConfig } from '@common/models';
+import { NAVIGATION_CONFIG } from '@common/navigation-config';
 
 
 @Component({

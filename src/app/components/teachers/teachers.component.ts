@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GenericPageConfig } from 'src/app/shared/generic-page/models';
+import { GenericPageConfig } from '@shared/generic-page/models';
 
 
 @Component({

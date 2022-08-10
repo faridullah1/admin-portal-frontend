@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
+import { GenericApiResponse } from '@common/models';
 import { ApiService } from 'src/app/services/api.service';
 import { FormConfig, FormField } from '../models';
 
@@ -21,7 +22,9 @@ export class FormComponent implements OnInit {
 	files: File[] = [];
 	disableSaveBtn = false;
 	
-	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<FormComponent>) { }
+	constructor(private apiService: ApiService,
+				private dialogRef: MatDialogRef<FormComponent>) 
+	{ }
 
 	ngOnInit(): void {
 		for (let field of this.config.fields) {
@@ -59,13 +62,13 @@ export class FormComponent implements OnInit {
 	}
 
 	getSingleRecord(): void {
-		this.apiService.get(`${this.config.slug}/${this.id}`).subscribe(resp => {
-			if (resp.data) {
-				const rec = resp.data[this.config.slug.slice(0, -1)];
-				this.theForm.patchValue(rec);
-			}
-		}, error => {
-			console.error(error);
+		this.apiService.get(`${this.config.slug}/${this.id}`).subscribe({
+			next: (resp: GenericApiResponse) => {
+				if (resp.data) {
+					const rec = resp.data[this.config.slug.slice(0, -1)];
+					this.theForm.patchValue(rec);
+				}
+			},
 		});
 	}
 

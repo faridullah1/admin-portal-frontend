@@ -1,6 +1,6 @@
-import { GenericApiResponse } from 'src/app/common/models';
 import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GenericApiResponse } from '@common/models';
 import { ApiService } from 'src/app/services/api.service';
 
 

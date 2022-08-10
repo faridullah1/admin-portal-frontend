@@ -1,5 +1,5 @@
-import { TableConfig } from './../../shared/generic-page/models';
 import { Component } from '@angular/core';
+import { TableConfig } from '@shared/generic-page/models';
 
 @Component({
   selector: 'app-user-queries',

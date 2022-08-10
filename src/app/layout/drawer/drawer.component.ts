@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
-import { Navigation } from 'src/app/common/navigation';
+import { Navigation } from '@common/navigation';
 import { Menu } from '../models';
 
 

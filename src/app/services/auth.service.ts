@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { GenericApiResponse } from '../common/models';
-import { AlertDialogService } from '../shared/alert-dialog/alert.service';
+import { AlertDialogService } from '@shared/alert-dialog/alert.service';
 
 
 @Injectable({

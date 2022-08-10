@@ -2,8 +2,8 @@ import { GenericApiResponse, User } from 'src/app/common/models';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Navigation } from 'src/app/common/navigation';
 import { Menu } from '../models';
+import { Navigation } from '@common/navigation';
 
 
 @Component({

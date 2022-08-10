@@ -5,10 +5,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { GenericApiResponse } from 'src/app/common/models';
 import { ApiService } from 'src/app/services/api.service';
 import { AlertDialogService } from '../../alert-dialog/alert.service';
 import { TableAction, TableConfig, TableRowAction, TableSignal } from '../models';
+import { GenericApiResponse } from '@common/models';
 
 
 @Component({
@@ -24,12 +24,12 @@ export class TableComponent implements OnInit {
 	@Output() signal = new EventEmitter<TableSignal>();
 	@ViewChild(MatSort) sort: MatSort;
 
-	selectedRow: any;
+	selectedRow: any = null;
 	dataSource: any;
-	loading: boolean;
-	displayedColumns: string[];
-	pageSizeOptions: number[];
-	totalRecords: number;
+	loading = false;
+	displayedColumns: string[] = [];
+	pageSizeOptions = [10, 15, 20, 25];
+	totalRecords = 0;
 	limit: number = 10;
 	page: number = 1;
 	dataError = false;
@@ -38,25 +38,20 @@ export class TableComponent implements OnInit {
 
 	showError = () => this.dataError;
 
-	constructor(private apiService: ApiService, private alertService: AlertDialogService, private cdr: ChangeDetectorRef) {
-		this.selectedRow = null;
+	constructor(private apiService: ApiService, 
+				private alertService: AlertDialogService, 
+				private cdr: ChangeDetectorRef) 
+	{
 		this.dataSource = new MatTableDataSource();
-		this.loading = false;
-		this.displayedColumns = [];
-		this.pageSizeOptions = [10, 15, 20, 25];
-		this.totalRecords = 0;
 	}
 
 	ngOnInit(): void {
 		this.actions.subscribe((ac: TableAction) => {
-			if (ac.type === 'reload') {
-				this.loadData();
-			}
+			if (ac.type === 'reload') this.loadData();
 		});
 
-		this.searchFC.valueChanges.pipe(debounceTime(400), distinctUntilChanged()).subscribe(val => {
-			this.searchData(val);
-		});
+		this.searchFC.valueChanges.pipe(debounceTime(400), distinctUntilChanged())
+			.subscribe(val => this.searchData(val));
 
 		if (this.config) {
 			for (let col of this.config.columns) {
@@ -86,17 +81,7 @@ export class TableComponent implements OnInit {
 
 		this.apiService.get(slug).subscribe({
 			next: (resp: GenericApiResponse) => this.onAPIResponse(resp),
-			error: (error) => {
-				this.loading = false;
-				this.dataError = true;
-				const r = {
-					title: 'Error loading data',
-					message: error.message
-				};
-
-				this.dataSource = [r];
-				this.cdr.detectChanges();
-			}
+			error: (error) => this.handleError(error)
 		});
 	}
 
@@ -121,7 +106,21 @@ export class TableComponent implements OnInit {
 		this.cdr.detectChanges();
 	}
 
+	handleError(error: any): void {
+		this.loading = false;
+		this.dataError = true;
+		const r = {
+			title: 'Error loading data',
+			message: error.message
+		};
+
+		this.dataSource = [r];
+		this.cdr.detectChanges();
+	}
+
 	searchData(value: string) {
+		if (value == null || value == void 0) return;
+		
 		if (value === '') {
 			this.loadData();
 			return;
