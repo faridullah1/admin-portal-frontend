@@ -90,8 +90,9 @@ export class TableComponent implements OnInit {
 		this.dataError = false;
 		this.dataSource = resp.data[this.config.slug];
 		this.dataSource.sort = this.sort;
-		this.totalRecords = resp.records;
 
+		this.totalRecords = resp.data[this.config.slug].length == 0 ? 0 : resp.records;
+	
 		if (this.totalRecords === 0)
 		{
 			this.dataError = true;
@@ -119,9 +120,7 @@ export class TableComponent implements OnInit {
 	}
 
 	searchData(value: string) {
-		if (value == null || value == void 0) return;
-		
-		if (value === '') {
+		if (value === '' || value == null) {
 			this.loadData();
 			return;
 		}
