@@ -1,6 +1,11 @@
 <div class="alert-dialog">
-	<div [class]="alert.type" *ngIf="alert.type === 'error'" class="mb-3" fxLayoutAlign="center center">
-		<mat-icon>{{ alert.icon }}</mat-icon>
+	<div class="circle mb-3" [class]="alert.type" fxLayoutAlign="center center">
+		<ng-container *ngIf="alert.type === 'warning'; else otherIcons">
+			<div style="font-size: 1.5rem;">!</div>
+		</ng-container>
+		<ng-template #otherIcons>
+			<mat-icon>{{ alert.icon }}</mat-icon>
+		</ng-template>
 	</div>
 
 	<div class="title mb-3">{{alert?.title}}</div>

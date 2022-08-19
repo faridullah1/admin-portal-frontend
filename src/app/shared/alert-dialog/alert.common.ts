@@ -26,9 +26,18 @@ export class Alert {
             case 'success':
                 this.icon = 'done';
                 break;
+
             case 'error':
                 this.icon = 'clear';
                 break;
+
+			case 'warning':
+				this.icon = 'info';
+				break;
+
+			case 'confirm':
+				this.icon = 'question_mark';
+				break;
 		}
 	}
 }

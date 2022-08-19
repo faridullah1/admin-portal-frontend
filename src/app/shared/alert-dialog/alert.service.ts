@@ -26,6 +26,11 @@ export class AlertDialogService {
 		return this.addAlert(alert);
 	}
 
+	warning(title: string): Observable<AlertAction> | undefined {
+		const alert: Alert = { type: 'warning', title };
+		return this.addAlert(alert);
+	}
+
 	error(title: string, message: string): Observable<AlertAction > | undefined {
 		const alert: Alert = { type: 'error', title, message };
 		return this.addAlert(alert);

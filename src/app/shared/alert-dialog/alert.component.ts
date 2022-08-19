@@ -14,14 +14,16 @@ export class AlertDialogComponent {
 	constructor(private dialogRef: MatDialogRef<AlertDialogComponent>) {}
 
 	onCancel(): void {
-		this.dialogRef.close();
-		this.alert.subject?.next({ positive: false });
-		this.alert.subject?.complete();
+		this.onCloseDialog();
 	}
 
 	onYes(): void {
+		this.onCloseDialog(true);
+	}
+
+	private onCloseDialog(isPositive = false): void {
 		this.dialogRef.close();
-		this.alert.subject?.next({ positive: true });
+		this.alert.subject?.next({ positive: isPositive });
 		this.alert.subject?.complete();
 	}
 }
