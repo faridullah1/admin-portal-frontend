@@ -28,6 +28,7 @@ export class AllEmployeesComponent implements OnInit {
 				],
 	
 				columns: [
+					{ name: 'photo', title: 'Photo', format: 'image' },
 					{ name: 'fullName', title: 'Full Name' },
 					{ name: 'gender', title: 'Gender' },
 					{ name: 'qualification', title: 'Qualification' },
@@ -49,6 +50,7 @@ export class AllEmployeesComponent implements OnInit {
 					{ name: 'mobileNo', title: 'Mobile Number', type: 'text', placeholder: 'Enter Mobile Number', required: true, minLength: 11, maxLength: 11 },
 					{ name: 'role', title: 'Role', type: 'select', placeholder: 'Select Role', required: true, options: this.employeeRoles},
 					{ name: 'email', title: 'Email', type: 'email', placeholder: 'Enter Email' },
+					{ name: 'photo', title: 'Photo', type: 'file', placeholder: 'Select a file' },
 					{ name: 'address', title: 'Address', type: 'text', placeholder: 'Enter Address' },
 				]
 			}

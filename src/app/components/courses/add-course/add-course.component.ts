@@ -1,6 +1,6 @@
 import { GenericApiResponse } from '@common/models';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Helpers } from 'src/app/shared/helpers';
 import { Employee } from 'src/app/common/models';
@@ -39,7 +39,7 @@ export class AddCourseComponent implements OnInit {
 			duration: new FormControl(null, [
 				Validators.required
 			]),
-			outline: new FormControl([], [Validators.required]),
+			outline: new FormArray([], [Validators.required]),
 			description: new FormControl(null, [
 				Validators.required,
 				Validators.minLength(10), 
@@ -73,9 +73,12 @@ export class AddCourseComponent implements OnInit {
 			next: (resp: GenericApiResponse) => {
 				if (resp.data) {
 					this.theForm.patchValue(resp.data['course']);
+
 					const courseOutline = resp.data.course.outline;
-					this.theForm.get('outline')?.setValue(courseOutline);
-					this.outlineItems = courseOutline;
+					courseOutline.forEach((element: string) => {
+						this.formArray.push(new FormControl(element));
+						this.outlineItems.add(element);
+					});
 
 					this.theForm.controls['teacher'].patchValue(resp.data.course.teacher._id);
 				}
@@ -87,18 +90,26 @@ export class AddCourseComponent implements OnInit {
 		return Helpers.integersOnly(ev);
 	}
 
+	get formArray(): FormArray {
+		return this.theForm.get('outline') as FormArray;
+	}
+
 	addOutlineItem(event: MatChipInputEvent) {
 		if (event.value) {
 			this.outlineItems.add(event.value);
-			this.theForm.get('outline')?.setValue(this.outlineItems);
+			this.formArray.push(new FormControl(event.value));
 			
 			event.chipInput.clear();
+			this.theForm.markAsDirty();
 		}
 	  }
 	
 	removeOutlineItem(outlineItem: string) {
 		this.outlineItems.delete(outlineItem);
-		this.theForm.get('outline')?.setValue(this.outlineItems);
+
+		const index = this.formArray.controls.findIndex(el => el.value === outlineItem);
+		this.formArray.removeAt(index);
+		this.theForm.markAsDirty();
 	}
 
 	onSave(): void {

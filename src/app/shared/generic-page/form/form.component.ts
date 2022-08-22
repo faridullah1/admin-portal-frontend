@@ -117,7 +117,7 @@ export class FormComponent implements OnInit {
 			}
 			else {
 				const fieldValue = this.theForm.get(field.name)?.value;
-				formData.append(field.name, fieldValue);
+				if (fieldValue) formData.append(field.name, fieldValue);
 			}
 		}
 
