@@ -20,6 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -48,6 +49,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatCheckboxModule,
 		MatMenuModule,
 		MatTooltipModule,
+		MatChipsModule,
 
         FlexLayoutModule
     ],
@@ -72,6 +74,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 		MatCheckboxModule,
 		MatMenuModule,
 		MatTooltipModule,
+		MatChipsModule,
 
         FlexLayoutModule
     ]

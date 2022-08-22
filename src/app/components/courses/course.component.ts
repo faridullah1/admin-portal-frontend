@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-import { GenericPageConfig, TableAction, TableSignal } from '@shared/generic-page/models';
+import { TableAction, TableSignal, TableConfig } from '@shared/generic-page/models';
 import { AddCourseComponent } from './add-course/add-course.component';
 
 
@@ -12,42 +12,31 @@ import { AddCourseComponent } from './add-course/add-course.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CoursesComponent {
-	courseConfig: GenericPageConfig;
+	courseConfig: TableConfig;
 	actions = new Subject<TableAction>();
 
     constructor(private dialog: MatDialog) {
 		this.courseConfig = {
-			tableConfig: {
-				title: 'Courses',
-				slug: 'courses',
+			title: 'Courses',
+			slug: 'courses',
 
-				addBtnText: 'Add Course',
-				showAdd: true,
-				showSearch: true,
-				searchColumn: 'name',
-	
-				rowActions: [
-					{name: 'edit', title: 'Edit', action: 'OnEdit' },
-					{name: 'delete', title: 'Delete', action: 'OnDelete' }
-				],
-	
-				columns: [
-					{ name: 'name', title: 'Course Name' },
-					{ name: 'teacher.fullName', title: 'Teacher' },
-					{ name: 'price', title: 'Price', format: 'number', sortable: true },
-					{ name: 'duration', title: 'Duration' },
-				]
-			},
-			formConfig: {
-				slug: 'courses',
-				title: 'Course',
+			addBtnText: 'Add Course',
+			showAdd: true,
+			showSearch: true,
+			searchColumn: 'name',
 
-				fields: [
-					{ name: 'name', title: 'Course Name', type: 'text', placeholder: 'Enter course name', required: true },
-					{ name: 'price', title: 'Price', type: 'number', placeholder: 'Enter course price', required: true },
-					{ name: 'duration', title: 'Duration', type: 'text', placeholder: 'Enter course duration', required: true },
-				]
-			}
+			rowActions: [
+				{name: 'edit', title: 'Edit', action: 'OnEdit' },
+				{name: 'delete', title: 'Delete', action: 'OnDelete' }
+			],
+
+			columns: [
+				{ name: 'name', title: 'Course' },
+				{ name: 'teacher.fullName', title: 'Teacher' },
+				{ name: 'price', title: 'Price', format: 'number', sortable: true },
+				{ name: 'duration', title: 'Duration' },
+				{ name: 'outline', title: 'Outline' }	
+			]
 		}
 	}
 

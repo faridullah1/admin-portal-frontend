@@ -33,18 +33,60 @@
 
 		<mat-form-field appearance="outline">
 			<mat-label>Price</mat-label>
-			<input type="number" matInput placeholder="Price" formControlName="price" min="0">
+			<input (keydown)="integersOnly($event)" matInput placeholder="Price" formControlName="price">
 			<mat-error *ngIf="theForm.controls['price'].errors">
 				<div *ngIf="theForm.controls['price'].hasError('required')">Price is required.</div>
-				<div *ngIf="theForm.controls['price'].hasError('minlength')">Price must be greator than 0</div>
+				<div *ngIf="theForm.controls['price'].hasError('min')">Price must be greator than 0</div>
+				<div *ngIf="theForm.controls['price'].hasError('max')">Price can not be greater than 50000</div>
 			</mat-error>
 		</mat-form-field>
 
 		<mat-form-field appearance="outline">
 			<mat-label>Duration</mat-label>
-			<input type="text" matInput placeholder="Duration" formControlName="duration">
+			<mat-select formControlName="duration">
+				<mat-option *ngFor="let opt of durations" [value]="opt">{{ opt }}</mat-option>
+			</mat-select>
 			<mat-error *ngIf="theForm.controls['duration'].hasError('required')">
 				duration is required.
+			</mat-error>
+		</mat-form-field>
+
+		<div class="mb-3">
+			<mat-form-field appearance="standard">
+				<input matInput
+					placeholder="New Course Outline Item" 
+					[matChipInputFor]="chipList" 
+					(matChipInputTokenEnd)="addOutlineItem($event)">
+
+				<mat-error *ngIf="theForm.get('outline')?.hasError('required')">
+					outline is required.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-chip-list #chipList aria-label="Course Outline Items" multiple class="w-100-p">
+				<mat-chip *ngFor="let item of outlineItems" (removed)="removeOutlineItem(item)">
+					{{item}}
+				</mat-chip>
+			</mat-chip-list>
+		</div>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea type="text" rows="4" matInput placeholder="Description" formControlName="description"></textarea>
+			<mat-error *ngIf="theForm.controls['description'].errors">
+				<div *ngIf="theForm.controls['description'].hasError('required')">description is required.</div>
+				<div *ngIf="theForm.controls['description'].hasError('minlength')">description must be greator than 10 charaters</div>
+				<div *ngIf="theForm.controls['description'].hasError('maxlength')">description can not be greater than 1000 characters</div>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field appearance="outline">
+			<mat-label>Audience (Who this course for)</mat-label>
+			<textarea type="text" rows="4" matInput placeholder="Audience" formControlName="audience"></textarea>
+			<mat-error *ngIf="theForm.controls['audience'].errors">
+				<div *ngIf="theForm.controls['audience'].hasError('required')">audience is required.</div>
+				<div *ngIf="theForm.controls['audience'].hasError('minlength')">audience must be greator than 10 charaters</div>
+				<div *ngIf="theForm.controls['audience'].hasError('maxlength')">audience can not be greater than 1000 characters</div>
 			</mat-error>
 		</mat-form-field>
 	</form>

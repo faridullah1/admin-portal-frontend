@@ -8,5 +8,10 @@
 	.student-form {
 		height: calc(100% - 95px);
 		overflow: auto;
+		padding-right: .5rem;
+	}
+
+	::ng-deep .mat-chip-list-wrapper {
+		width: 100%;
 	}
 }
