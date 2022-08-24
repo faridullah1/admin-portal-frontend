@@ -31,6 +31,7 @@ export class CoursesComponent {
 			],
 
 			columns: [
+				{ name: 'image', title: 'Image', format: 'image' },
 				{ name: 'name', title: 'Course' },
 				{ name: 'teacher.fullName', title: 'Teacher' },
 				{ name: 'price', title: 'Price', format: 'number', sortable: true },
@@ -57,8 +58,10 @@ export class CoursesComponent {
 
 		if (id) dialog.componentInstance.id = id;
 
-		dialog.afterClosed().subscribe(() => {
-			this.actions.next({ type: 'reload' });
+		dialog.afterClosed().subscribe((reload: boolean) => {
+			if (reload) {
+				this.actions.next({ type: 'reload' });
+			}
 		})
 	}
 }
