@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column">
 	<div fxLayout="row" fxLayoutAlign="space-between center">
 		<h2 style="margin: 0;">{{ id ? 'Update Course' : 'Add Course' }}</h2>
-		<button mat-icon-button matDialogClose>
+		<button mat-icon-button (click)="onCloseDialog()">
 			<mat-icon>close</mat-icon>
 		</button>
 	</div>
@@ -90,9 +90,24 @@
 				<div *ngIf="theForm.controls['audience'].hasError('maxlength')">audience can not be greater than 1000 characters</div>
 			</mat-error>
 		</mat-form-field>
+
+		<input type="file" hidden #fileInput [accept]="'images/*'" (change)="onFileChange()">
+					
+		<mat-form-field appearance="outline">
+			<input type="text" class="overflow" matInput readonly placeholder="Select Course Image" formControlName="image">
+			<button type="button" mat-stroked-button color="primary" matSuffix 
+				class="btn-browse-file" (click)="onUpload()">Browse
+			</button>
+		</mat-form-field>
 	</form>
 
 	<div fxLayoutAlign="end">
-		<button mat-raised-button color="primary" [disabled]="theForm.invalid || !theForm.dirty" (click)="onSave()">Save</button>
+		<button mat-raised-button color="primary" (click)="onSave()" 
+            [disabled]="theForm.invalid || !theForm.dirty || disableSaveBtn">
+			<div style="display: flex; align-items: center;">
+				<mat-spinner *ngIf="disableSaveBtn" diameter="20" strokeWidth="3" style="margin-right: .7rem;"></mat-spinner>
+				<span>Save</span>
+			</div>
+        </button>
 	</div>
 </div>

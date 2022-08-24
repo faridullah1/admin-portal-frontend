@@ -18,3 +18,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .width-100-p {
 	width: 100%;
 }
+
+.btn-browse-file {
+	position: absolute !important;
+	top: -30px;
+	right: 0;
+}
+
+.overflow {
+	width: 75% !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

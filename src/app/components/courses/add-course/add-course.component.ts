@@ -1,5 +1,5 @@
 import { GenericApiResponse } from '@common/models';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Helpers } from 'src/app/shared/helpers';
@@ -14,11 +14,14 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./add-course.component.scss']
 })
 export class AddCourseComponent implements OnInit {
+	@ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+
 	teachers: Employee[] = [];
 	id: string;
 	theForm: FormGroup;
 	durations: string[] = [];
 	outlineItems = new Set<string>();
+	disableSaveBtn = false;
 
 	constructor(private apiService: ApiService, private dialogRef: MatDialogRef<AddCourseComponent>) 
 	{
@@ -50,6 +53,7 @@ export class AddCourseComponent implements OnInit {
 				Validators.minLength(10), 
 				Validators.maxLength(500)
 			]),
+			image: new FormControl(null),
 		});
 
 		this.durations = ['1 Month', '3 Months', '6 Months', '1 Year'];
@@ -112,26 +116,70 @@ export class AddCourseComponent implements OnInit {
 		this.theForm.markAsDirty();
 	}
 
+	onFileChange(): void
+	{
+		console.log(this.theForm.value);
+		const files = this.fileInput.nativeElement.files;
+		if (files) {
+			this.theForm.get('image')?.setValue(files[0].name);
+			this.theForm.markAsDirty();
+		}
+	}
+
+	onUpload(): void
+	{
+		this.fileInput.nativeElement.value = '';
+		this.fileInput.nativeElement.click();
+	}
+
+	makePayload(): FormData {
+		const formData = new FormData();
+
+		for (let key in this.theForm.controls) {
+			if (key === 'image' && this.fileInput.nativeElement.files) {
+				formData.append(key, this.fileInput.nativeElement.files[0]);
+				continue;
+			}
+			
+			formData.append(key, this.theForm.get(key)?.value);
+		}
+
+		return formData;
+	}
+
 	onSave(): void {
+		this.disableSaveBtn = true;
+
+		let payload = this.theForm.value;
+		
+		const files = this.fileInput.nativeElement.files;
+		if (files && files?.length > 0) {
+			payload = this.makePayload();
+		}
+
 		if (this.id) {
-			this.apiService.update(`courses/${this.id}`, this.theForm.value).subscribe({
+			this.apiService.update(`courses/${this.id}`, payload).subscribe({
 				next: (resp) => {
 					if (resp.data) {
-						this.dialogRef.close();
+						this.onCloseDialog(true);
 					}
 				},
-				error: (error) => console.error(error)
+				error: () => this.disableSaveBtn = false
 			});
 		}
 		else {
-			this.apiService.post('courses', this.theForm.value).subscribe({
+			this.apiService.post('courses', payload).subscribe({
 				next: (resp) => {
 					if (resp.data) {
-						this.dialogRef.close();
+						this.onCloseDialog(true);
 					}
 				},
-				error: (error) => console.error(error)
+				error: () => this.disableSaveBtn = false
 			});
 		}
+	}
+
+	onCloseDialog(reload = false): void {
+		this.dialogRef.close(reload);
 	}
 }
